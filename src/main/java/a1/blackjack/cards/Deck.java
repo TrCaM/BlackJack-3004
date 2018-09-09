@@ -13,6 +13,10 @@ public class Deck {
     cards = new ArrayList<Card>();
   }
 
+  public static Deck getEmptyDeck() {
+    return new Deck();
+  }
+
   public static Deck getFullDeck() {
     throw new UnsupportedOperationException();
   }
