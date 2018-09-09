@@ -5,7 +5,6 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -13,7 +12,6 @@ import static org.junit.Assert.assertThat;
 
 public class DeckTest {
 
-  private static final int DECK_SIZE = 52;
   private static final Card D5 = new Card(Suit.DIAMOND, 5);
   private static final Card S6 = new Card(Suit.SPADE, 6);
   private static final Card DK = new Card(Suit.DIAMOND, 13);
@@ -37,12 +35,5 @@ public class DeckTest {
   public void draw_emptyDeck_returnNull() {
     Deck deck = Deck.getEmptyDeck();
     assertNull(deck.draw());
-  }
-
-  @Test
-  public void shuffle_shouldContainsSameCards() {
-    Deck deck = Deck.getDeck(SAMPLE_CARDS);
-    deck.shuffle();
-    assertThat(deck.getCards(), containsInAnyOrder(D5, S6, DK, CA, H10));
   }
 }

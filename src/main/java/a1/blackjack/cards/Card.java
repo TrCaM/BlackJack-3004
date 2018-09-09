@@ -28,6 +28,10 @@ public class Card{
     this.isUp = false;
   }
 
+  public void faceUp() {
+    this.isUp = true;
+  }
+
   public Suit getSuit() {
     return this.suit;
   }
@@ -36,10 +40,9 @@ public class Card{
     return this.value;
   }
 
-  public void faceUp() {
-    this.isUp = true;
+  public boolean isUp() {
+    return this.isUp;
   }
-
   public boolean equals(Card anotherCard) {
     return this.suit == anotherCard.suit && this.value == anotherCard.value;
   }

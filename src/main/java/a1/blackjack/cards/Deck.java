@@ -1,6 +1,7 @@
 package a1.blackjack.cards;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -18,17 +19,27 @@ public class Deck {
   }
 
   /**
-   * Get a full deck of 52 cards.
-   */
-  public static Deck getFullDeck() {
-    throw new UnsupportedOperationException();
-  }
-
-  /**
    * Form a start with the specified cards
    */
   public static Deck getDeck(List<Card> cards) {
-    throw new UnsupportedOperationException();
+     Deck deck = new Deck();
+     for (Card card : cards) {
+       deck.cards.add(card);
+     }
+     return deck;
+  }
+
+  /**
+   * Get a full deck of 52 cards.
+   */
+  public static Deck getFullDeck() {
+    Deck deck = new Deck();
+    for (Suit suit : Suit.values()) {
+      for (int value = 1; value <= 13; value++) {
+        deck.cards.add(new Card(suit, value));
+      }
+    }
+    return deck;
   }
 
   /**
@@ -42,14 +53,14 @@ public class Deck {
    * Draw the card on top
    */
   public Card draw() {
-    throw new UnsupportedOperationException();
+    return cards.isEmpty() ? null : cards.remove(cards.size() -1);
   }
 
   /**
    * Shuffle randomly the deck
    */
   public void shuffle() {
-    throw new UnsupportedOperationException();
+    Collections.shuffle(cards);
   }
 
   public List<Card> getCards() {
