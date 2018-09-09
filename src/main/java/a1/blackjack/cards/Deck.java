@@ -17,15 +17,43 @@ public class Deck {
     return new Deck();
   }
 
+  /**
+   * Get a full deck of 52 cards.
+   */
   public static Deck getFullDeck() {
     throw new UnsupportedOperationException();
   }
 
+  /**
+   * Form a start with the specified cards
+   */
+  public static Deck getDeck(List<Card> cards) {
+    throw new UnsupportedOperationException();
+  }
+
+  /**
+   * Get the number of cards in the deck
+   */
+  public int size() {
+    return cards.size();
+  }
+
+  /**
+   * Draw the card on top
+   */
   public Card draw() {
     throw new UnsupportedOperationException();
   }
 
+  /**
+   * Shuffle randomly the deck
+   */
   public void shuffle() {
     throw new UnsupportedOperationException();
   }
+
+  public List<Card> getCards() {
+    return this.cards;
+  }
+
 }

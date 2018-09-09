@@ -3,7 +3,7 @@ package a1.blackjack.cards;
 /**
  * Model class for the cards.
  */
-public class Card {
+public class Card{
   private final Suit suit;
   private final int value;
   private boolean isUp;
@@ -15,10 +15,14 @@ public class Card {
    *    - If it is 11, it's a Jack card.
    *    - If it is 12, it's a Queen card.
    *    - If it is 13, it's a King card.
+   *    - Otherwise it throws an error.
    * @param suit the {@code Suit} of the card
    * @param value the {@code value} number of the card
    */
   Card(Suit suit, int value) {
+    if (value < 1 || value > 13) {
+      throw new IllegalArgumentException("Invalid card value");
+    }
     this.suit = suit;
     this.value = value;
     this.isUp = false;
@@ -34,5 +38,9 @@ public class Card {
 
   public void faceUp() {
     this.isUp = true;
+  }
+
+  public boolean equals(Card anotherCard) {
+    return this.suit == anotherCard.suit && this.value == anotherCard.value;
   }
 }
