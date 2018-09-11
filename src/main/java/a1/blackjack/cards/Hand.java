@@ -1,8 +1,9 @@
-package a1.blackjack.players;
+package a1.blackjack.cards;
 
 import a1.blackjack.cards.Card;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -15,6 +16,12 @@ public class Hand {
     cards = new ArrayList<>();
   }
 
+  public Hand(Card... cards) {
+    this.cards = new ArrayList<Card>();
+    for (Card card :cards) {
+     this.cards.add(card);
+    }
+  }
   /**
    * Add a card in to the hand.
    */
@@ -33,7 +40,7 @@ public class Hand {
   }
 
   /**
-   * Check if the hand is empty.
+   * Check if the hand is empty
    */
   public boolean isEmpty() {
     return cards.isEmpty();

@@ -1,10 +1,7 @@
 package a1.blackjack.commands;
 
-import a1.blackjack.cards.Card;
-import a1.blackjack.players.Hand;
+import a1.blackjack.cards.Hand;
 import a1.blackjack.players.Player;
-
-import java.util.List;
 
 /**
  * Automatically generate commands base on the current player's hand

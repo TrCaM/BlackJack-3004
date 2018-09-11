@@ -1,7 +1,7 @@
 package a1.blackjack.players;
 
 import a1.blackjack.cards.Deck;
-import a1.blackjack.commands.AutoCommandEngine;
+import a1.blackjack.cards.Hand;
 import a1.blackjack.commands.CommandEngine;
 
 /**
