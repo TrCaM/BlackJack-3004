@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="282dd04d-eeb4-4e8d-a2be-d4f386fc0a2f" name="Default Changelist" comment="k">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/a1/blackjack/cards/HandTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/a1/blackjack/players/PlayerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/a1/blackjack/commands/AutoCommandEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/a1/blackjack/commands/AutoCommandEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/a1/blackjack/players/Hand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/a1/blackjack/cards/Hand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/a1/blackjack/players/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/a1/blackjack/players/Player.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -32,6 +27,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+          <entry key="gitignore" value="12" />
           <entry key="java" value="17267" />
           <entry key="txt" value="6" />
           <entry key="xml" value="76" />
@@ -40,13 +36,14 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="17267" />
-          <entry key="PLAIN_TEXT" value="6" />
+          <entry key="PLAIN_TEXT" value="18" />
           <entry key="XML" value="76" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="2" />
+          <entry key="gitignore" value="1" />
           <entry key="iml" value="1" />
           <entry key="java" value="28" />
           <entry key="xml" value="3" />
@@ -57,6 +54,7 @@
           <entry key="CLASS" value="2" />
           <entry key="IDEA_MODULE" value="1" />
           <entry key="JAVA" value="28" />
+          <entry key="PLAIN_TEXT" value="1" />
           <entry key="XML" value="3" />
         </counts>
       </usages-collector>
@@ -115,14 +113,13 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/a1/blackjack/cards/Hand.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="111">
-                  <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
+                <state relative-caret-position="128">
+                  <caret line="27" column="34" lean-forward="true" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#412#413#0" expanded="true" />
                     <element signature="e#437#438#0" expanded="true" />
                     <element signature="e#686#687#0" expanded="true" />
                     <element signature="e#737#738#0" expanded="true" />
@@ -131,6 +128,15 @@
                     <element signature="e#877#878#0" expanded="true" />
                     <element signature="e#899#900#0" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/.gitignore">
+              <provider selected="true" editor-type-id="text-editor">
+                <state>
+                  <caret column="5" selection-start-column="5" selection-end-column="5" />
                 </state>
               </provider>
             </entry>
@@ -178,8 +184,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/test/java/a1/blackjack/cards/HandTest.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="451">
-                  <caret line="49" column="39" selection-start-line="49" selection-start-column="39" selection-end-line="49" selection-end-column="39" />
+                <state relative-caret-position="230">
+                  <caret line="36" column="7" lean-forward="true" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -229,6 +235,7 @@
         <option value="$PROJECT_DIR$/src/test/java/a1/blackjack/players/HandTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/a1/blackjack/cards/Hand.java" />
         <option value="$PROJECT_DIR$/src/test/java/a1/blackjack/cards/HandTest.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -385,7 +392,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536677925635" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1536678703369" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -523,20 +530,11 @@
       <workItem from="1536432911700" duration="11719000" />
       <workItem from="1536499813968" duration="26786000" />
       <workItem from="1536607421842" duration="5979000" />
-      <workItem from="1536674824962" duration="3047000" />
+      <workItem from="1536674824962" duration="3848000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="DeckTest - 2018.09.09 at 12h 53m 41s.xml">
-      <configuration name="DeckTest" configurationId="AndroidJUnit" />
-    </history-entry>
-    <history-entry file="DeckTest - 2018.09.09 at 12h 54m 50s.xml">
-      <configuration name="DeckTest" configurationId="AndroidJUnit" />
-    </history-entry>
-    <history-entry file="DeckTest - 2018.09.09 at 12h 54m 54s.xml">
-      <configuration name="DeckTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="DeckTest - 2018.09.09 at 12h 56m 31s.xml">
       <configuration name="DeckTest" configurationId="JUnit" />
     </history-entry>
@@ -558,9 +556,18 @@
     <history-entry file="a1_blackjack_cards_in_TriCaoAssignment1 - 2018.09.09 at 13h 03m 40s.xml">
       <configuration name="a1.blackjack.cards in TriCaoAssignment1" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="HandTest - 2018.09.11 at 10h 58m 02s.xml">
+      <configuration name="HandTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_Features_in__test - 2018.09.11 at 10h 58m 27s.xml">
+      <configuration name="All Features in: test" configurationId="CucumberJavaRunConfigurationType" />
+    </history-entry>
+    <history-entry file="a1_blackjack_in_TriCaoAssignment1 - 2018.09.11 at 10h 58m 39s.xml">
+      <configuration name="a1.blackjack in TriCaoAssignment1" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47531000" />
+    <option name="totallyTimeSpent" value="48332000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -786,24 +793,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/a1/blackjack/cards/Hand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#412#413#0" expanded="true" />
-            <element signature="e#437#438#0" expanded="true" />
-            <element signature="e#686#687#0" expanded="true" />
-            <element signature="e#737#738#0" expanded="true" />
-            <element signature="e#811#812#0" expanded="true" />
-            <element signature="e#843#844#0" expanded="true" />
-            <element signature="e#877#878#0" expanded="true" />
-            <element signature="e#899#900#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/a1/blackjack/players/PlayerTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -816,11 +805,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/a1/blackjack/cards/HandTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="49" column="39" selection-start-line="49" selection-start-column="39" selection-end-line="49" selection-end-column="39" />
+        <state relative-caret-position="230">
+          <caret line="36" column="7" lean-forward="true" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/a1/blackjack/cards/Hand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="27" column="34" lean-forward="true" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#437#438#0" expanded="true" />
+            <element signature="e#686#687#0" expanded="true" />
+            <element signature="e#737#738#0" expanded="true" />
+            <element signature="e#811#812#0" expanded="true" />
+            <element signature="e#843#844#0" expanded="true" />
+            <element signature="e#877#878#0" expanded="true" />
+            <element signature="e#899#900#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="5" selection-start-column="5" selection-end-column="5" />
         </state>
       </provider>
     </entry>
