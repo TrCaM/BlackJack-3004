@@ -2,7 +2,7 @@ package a1.blackjack.cards;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class HandTest {
   // Some sample cards for testing
@@ -52,5 +52,17 @@ public class HandTest {
     assertEquals(hand1.getHandScore(), 25);
     assertEquals(hand2.getHandScore(), 30);
     assertEquals(hand3.getHandScore(), 22);
+  }
+
+  @Test
+  public void canSplit_returnTrue() {
+    Hand hand = new Hand(DA, SA);
+    assertTrue(hand.canSplit());
+  }
+
+  @Test
+  public void canSplit_returnFalse() {
+    Hand hand = new Hand(DA, D7);
+    assertFalse(hand.canSplit());
   }
 }
