@@ -49,8 +49,8 @@ public class HandTest {
     Hand hand1 = new Hand(SK, S8, D7);
     Hand hand2 = new Hand(S8, D7, H5, CJ);
     Hand hand3 = new Hand(DA, SA, SK, HQ);
-    assertEquals(hand1.getHandScore(), 0);
-    assertEquals(hand2.getHandScore(), 0);
-    assertEquals(hand3.getHandScore(), 0);
+    assertEquals(hand1.getHandScore(), 25);
+    assertEquals(hand2.getHandScore(), 30);
+    assertEquals(hand3.getHandScore(), 22);
   }
 }
