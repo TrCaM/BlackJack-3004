@@ -13,6 +13,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -158,5 +159,17 @@ public class PlayerTest {
     assertThat(player.getMode(), is(PlayerMode.STANDING));
     assertThat(player.getMainHand().getCards(), contains(SK, HQ));
     assertThat(player.getSplitHand().getCards(), contains(CK, DA));
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void split_StandingMode_shouldThrow() {
+    player.setMode(PlayerMode.STANDING);
+    player.split(Deck.getEmptyDeck());
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void split_deckLacksCards_shouldThrow() {
+    player.setMode(PlayerMode.STANDING);
+    player.split(Deck.getDeck(Collections.singletonList(SK)));
   }
 }
