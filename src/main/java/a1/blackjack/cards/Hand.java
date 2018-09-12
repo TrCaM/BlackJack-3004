@@ -48,12 +48,13 @@ public class Hand {
       numAce -= 1;
     }
 
-    return score > 21 ? 0 : score;
+    return score;
   }
 
-  /**
-   * Check if the hand is empty
-   */
+  public boolean isBust() {
+    return getHandScore() > 21;
+  }
+
   public boolean isEmpty() {
     return cards.isEmpty();
   }
