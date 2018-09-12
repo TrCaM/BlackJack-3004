@@ -17,7 +17,7 @@ public class AutoCommandEngine implements CommandEngine{
 
   @Override
   public void setup(Player player) {
-    this.playingHand = player.getActiveHand();
+    this.playingHand = player.getMainHand();
     this.splitHand = player.getSplitHand();
   }
 }

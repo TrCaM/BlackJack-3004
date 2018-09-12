@@ -87,6 +87,12 @@ public class PlayerTest {
     player.hit(Deck.getEmptyDeck());
   }
 
+  @Test(expected = IllegalStateException.class)
+  public void hit_StandingMode_shouldThrow() {
+    player.setMode(PlayerMode.STANDING);
+    player.hit(Deck.getEmptyDeck());
+  }
+
   @Test
   public void stand_normalMode() {
     player.stand();
