@@ -55,6 +55,11 @@ public class Hand {
     return getHandScore() > 21;
   }
 
+  public boolean canSplit() {
+    return cards.size() == 2
+        && cards.get(1).getValue() == cards.get(0).getValue();
+  }
+
   public boolean isEmpty() {
     return cards.isEmpty();
   }
