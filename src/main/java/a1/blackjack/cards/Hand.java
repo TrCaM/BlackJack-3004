@@ -62,6 +62,10 @@ public class Hand {
     return getHandScore() > 21;
   }
 
+  public boolean isBlackjack() {
+    return getHandScore() == 21 && cards.size() == 2;
+  }
+
   public boolean canSplit() {
     return cards.size() == 2
         && cards.get(1).getValue() == cards.get(0).getValue();
