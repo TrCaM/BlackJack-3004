@@ -55,6 +55,24 @@ public class HandTest {
   }
 
   @Test
+  public void isBlackjack_returnTrue() {
+    Hand hand = new Hand(DA,CJ);
+    assertTrue(hand.isBlackjack());
+  }
+
+  @Test
+  public void isBlackjack_returnFalse() {
+    Hand hand = new Hand(CJ,H5);
+    assertFalse(hand.isBlackjack());
+  }
+
+  @Test
+  public void isBlackjack_21ButMoreThan2Cards_returnFalse() {
+    Hand hand = new Hand(C3, S8, DA);
+    assertFalse(hand.isBlackjack());
+  }
+
+  @Test
   public void canSplit_returnTrue() {
     Hand hand = new Hand(DA, SA);
     assertTrue(hand.canSplit());
