@@ -19,7 +19,7 @@ public class Card{
    * @param suit the {@code Suit} of the card
    * @param value the {@code value} number of the card
    */
-  Card(Suit suit, int value) {
+  public Card(Suit suit, int value) {
     if (value < 1 || value > 13) {
       throw new IllegalArgumentException("Invalid card value");
     }

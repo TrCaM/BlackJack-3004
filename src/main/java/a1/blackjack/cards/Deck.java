@@ -23,9 +23,7 @@ public class Deck {
    */
   public static Deck getDeck(List<Card> cards) {
      Deck deck = new Deck();
-     for (Card card : cards) {
-       deck.cards.add(card);
-     }
+     deck.cards.addAll(cards);
      return deck;
   }
 
