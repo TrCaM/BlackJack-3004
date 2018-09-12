@@ -1,9 +1,7 @@
 package a1.blackjack.cards;
 
-import a1.blackjack.cards.Card;
-
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -16,11 +14,9 @@ public class Hand {
     cards = new ArrayList<>();
   }
 
-  public Hand(Card... cards) {
-    this.cards = new ArrayList<Card>();
-    for (Card card :cards) {
-     this.cards.add(card);
-    }
+  Hand(Card... cards) {
+    this.cards = new ArrayList<>();
+    Collections.addAll(this.cards, cards);
   }
   /**
    * Add a card in to the hand.
@@ -36,7 +32,23 @@ public class Hand {
    * @return the score the hand
    */
   public int getHandScore() {
-    throw new UnsupportedOperationException();
+    int numAce = 0;
+    int score = 0;
+    for (Card card : cards) {
+      int value = card.getValue();
+      score += value > 10 ? 10 : value;
+      numAce += value == 1 ? 1 : 0;
+    }
+    while (numAce > 0) {
+      if (score < 12) {
+        score+= 10;
+      } else if (score < 13) {
+        score+= 9;
+      }
+      numAce -= 1;
+    }
+
+    return score > 21 ? 0 : score;
   }
 
   /**

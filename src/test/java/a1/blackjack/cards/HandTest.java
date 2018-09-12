@@ -20,8 +20,8 @@ public class HandTest {
   public void getHandScore_onlyNumberCards() {
     Hand hand1 = new Hand(S8, H5, D7);
     Hand hand2 = new Hand(C3, D7);
-    assertEquals(hand1.getHandScore(), 20);
-    assertEquals(hand2.getHandScore(), 10);
+    assertEquals(20, hand1.getHandScore());
+    assertEquals(10, hand2.getHandScore());
   }
 
   @Test
@@ -29,9 +29,9 @@ public class HandTest {
     Hand hand1 = new Hand(H5, CJ);
     Hand hand2 = new Hand(SK, C3);
     Hand hand3 = new Hand(SK, HQ);
-    assertEquals(hand1.getHandScore(), 15);
-    assertEquals(hand2.getHandScore(), 13);
-    assertEquals(hand3.getHandScore(), 20);
+    assertEquals(15, hand1.getHandScore());
+    assertEquals(13, hand2.getHandScore());
+    assertEquals(20, hand3.getHandScore());
   }
 
   @Test
@@ -39,9 +39,9 @@ public class HandTest {
     Hand hand1 = new Hand(DA, S8, D7);
     Hand hand2 = new Hand(DA, SK);
     Hand hand3 = new Hand(DA, SA, D7, C3);
-    assertEquals(hand1.getHandScore(), 16);
-    assertEquals(hand2.getHandScore(), 21);
-    assertEquals(hand3.getHandScore(), 21);
+    assertEquals(16, hand1.getHandScore());
+    assertEquals(21, hand2.getHandScore());
+    assertEquals(21, hand3.getHandScore());
   }
 
   @Test
