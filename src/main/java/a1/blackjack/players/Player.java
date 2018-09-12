@@ -40,12 +40,11 @@ public class Player {
 
   /**
    * Draw a card from the deck and calculate that next state by analyzing the hand
-   *  - Validate if the hit action is valid, otherwise throw
-   *  - Draw a card and add to the hand based on the current mode:
-   *      + If player is using split hand in split mode, then add the card to split hand
-   *      + Otherwise add to the normal hand
-   *  - If the hand is busted then do stand
-   * @param deck
+   * - Validate if the hit action is valid, otherwise throw
+   * - Draw a card and add to the hand based on the current mode:
+   * + If player is using split hand in split mode, then add the card to split hand
+   * + Otherwise add to the normal hand
+   * - If the hand is busted then do stand
    */
   void hit(Deck deck) {
     validatePlayerStateForHit(deck);
@@ -92,8 +91,18 @@ public class Player {
     }
   }
 
+  /**
+   * Split the current hand into 2 hands given that the 2 cards of the original hand are identical
+   * (this method does not check this condition). Each hand will contain 1 of the originals and draw
+   * 1 more extra. If blackjack happens then the player mode should go STANDING.
+   */
   void split(Deck deck) {
-    throw new UnsupportedOperationException();
+    validatePlayerStateForSplit(deck);
+    splitHand.addCard(mainHand.removeCard(1));
+    mainHand.addCard(deck.draw());
+    splitHand.addCard(deck.draw());
+    mode = (mainHand.isBlackjack() || splitHand.isBlackjack())
+        ? PlayerMode.STANDING : PlayerMode.SPLITTING_MAIN;
   }
 
   private void validatePlayerStateForSplit(Deck deck) {
