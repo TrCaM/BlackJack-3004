@@ -14,7 +14,7 @@ public class Hand {
     cards = new ArrayList<>();
   }
 
-  Hand(Card... cards) {
+  public Hand(Card... cards) {
     this.cards = new ArrayList<>();
     Collections.addAll(this.cards, cards);
   }
