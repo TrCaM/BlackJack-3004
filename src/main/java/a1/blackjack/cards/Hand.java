@@ -26,6 +26,13 @@ public class Hand {
   }
 
   /**
+   * Remove a card given the position (index) from the hand.
+   */
+  public Card removeCard(int position) {
+    return cards.remove(position);
+  }
+
+  /**
    * Compute the highest score that is not bust for the hand:
    *  - If the hand contains aces, it compute the best score that <= 21
    *  - If the hand is busted, return 0
