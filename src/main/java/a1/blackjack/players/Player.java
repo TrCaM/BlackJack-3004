@@ -56,9 +56,6 @@ public class Player {
     }
   }
 
-  private void setNextMode() {
-  }
-
   private void validatePlayerStateForHit(Deck deck) {
     if (mode == PlayerMode.STANDING) {
       throw new IllegalStateException("Hit while standing");
@@ -74,7 +71,7 @@ public class Player {
   private Hand addCardToHand(Card drawCard) {
     Hand hand;
     switch (mode) {
-      case SPLITING_HAND:
+      case SPLITTING_HAND:
         hand = splitHand;
         break;
       default:
@@ -87,16 +84,25 @@ public class Player {
   void stand() {
     switch (mode) {
       case NORMAL:
-      case SPLITING_HAND:
+      case SPLITTING_HAND:
         mode = PlayerMode.STANDING;
         break;
       default:
-        mode = PlayerMode.SPLITING_HAND;
+        mode = PlayerMode.SPLITTING_HAND;
     }
   }
 
   void split(Deck deck) {
     throw new UnsupportedOperationException();
+  }
+
+  private void validatePlayerStateForSplit(Deck deck) {
+    if (mode == PlayerMode.STANDING) {
+      throw new IllegalStateException("Split while standing");
+    }
+    if (deck.size() < 2) {
+      throw new IllegalStateException("Split needs deck to have at least 2 cards");
+    }
   }
 
   /* Package private setter methods used for testing */

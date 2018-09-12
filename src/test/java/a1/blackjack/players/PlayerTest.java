@@ -71,7 +71,7 @@ public class PlayerTest {
 
   @Test
   public void hit_mainSplitingMode_shouldSucceed() {
-    player.setMode(PlayerMode.SPLITING_MAIN);
+    player.setMode(PlayerMode.SPLITTING_MAIN);
     List<Card> cards = Arrays.asList(D7, CJ, HQ);
     deck = Deck.getDeck(cards);
     for (int i = 0; i < 3; i++) {
@@ -79,7 +79,7 @@ public class PlayerTest {
     }
     Hand hand = player.getMainHand();
     assertThat(hand.getCards(), contains(HQ, CJ, D7));
-    assertThat(player.getMode(), is(PlayerMode.SPLITING_HAND));
+    assertThat(player.getMode(), is(PlayerMode.SPLITTING_HAND));
   }
 
   @Test(expected = IllegalStateException.class)
@@ -102,16 +102,16 @@ public class PlayerTest {
 
   @Test
   public void stand_splitMainMode() {
-    player.setMode(PlayerMode.SPLITING_MAIN);
+    player.setMode(PlayerMode.SPLITTING_MAIN);
 
     player.stand();
 
-    assertThat(player.getMode(), is(PlayerMode.SPLITING_HAND));
+    assertThat(player.getMode(), is(PlayerMode.SPLITTING_HAND));
   }
 
   @Test
   public void stand_splitHandMode() {
-    player.setMode(PlayerMode.SPLITING_HAND);
+    player.setMode(PlayerMode.SPLITTING_HAND);
 
     player.stand();
 
@@ -127,7 +127,7 @@ public class PlayerTest {
 
     player.split(deck);
 
-    assertThat(player.getMode(), is(PlayerMode.SPLITING_MAIN));
+    assertThat(player.getMode(), is(PlayerMode.SPLITTING_MAIN));
     assertThat(player.getMainHand().getCards(), contains(H7, HQ));
     assertThat(player.getSplitHand().getCards(), contains(D7, DA));
   }
