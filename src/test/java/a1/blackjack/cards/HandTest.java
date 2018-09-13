@@ -8,6 +8,7 @@ public class HandTest {
   // Some sample cards for testing
   private static final Card S8 = new Card(Suit.SPADE, 8);
   private static final Card H5 = new Card(Suit.HEART, 5);
+  private static final Card C6 = new Card(Suit.CLUB, 6);
   private static final Card C3 = new Card(Suit.CLUB, 3);
   private static final Card D7 = new Card(Suit.SPADE, 7);
   private static final Card DA = new Card(Suit.DIAMOND, 1);
@@ -82,5 +83,24 @@ public class HandTest {
   public void canSplit_returnFalse() {
     Hand hand = new Hand(DA, D7);
     assertFalse(hand.canSplit());
+  }
+
+  @Test
+  public void isSoft17_returnTrue() {
+    Hand hand = new Hand(DA, C6);
+    assertTrue(hand.isSoft17());
+  }
+
+  @Test
+  public void isSoft17_twoAces_returnTrue() {
+    Hand hand = new Hand(DA, SA, H5);
+    assertTrue(hand.isSoft17());
+  }
+
+  @Test
+  public void isSoft17_returnFalse() {
+    Hand hand = new Hand(DA, H5);
+    assertFalse(hand.isSoft17());
+
   }
 }
