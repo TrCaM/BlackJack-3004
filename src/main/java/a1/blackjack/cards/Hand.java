@@ -66,6 +66,11 @@ public class Hand {
     return getHandScore() == 21 && cards.size() == 2;
   }
 
+  public boolean isSoft17() {
+    int rawScore = cards.stream().mapToInt(Card::getValue).sum();
+    return rawScore == 7 && getHandScore() == 17;
+  }
+
   public boolean canSplit() {
     return cards.size() == 2
         && cards.get(1).getValue() == cards.get(0).getValue();
