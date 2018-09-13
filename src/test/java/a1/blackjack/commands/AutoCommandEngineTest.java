@@ -14,6 +14,7 @@ import org.mockito.junit.MockitoRule;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class AutoCommandEngineTest {
@@ -51,6 +52,8 @@ public class AutoCommandEngineTest {
     Command command = commandEngine.getNextCommand();
 
     assertThat(command, is(Command.HIT));
+    verify(game).getActivePlayer();
+    verify(player).getPlayingHand();
   }
 
   @Test
@@ -61,6 +64,8 @@ public class AutoCommandEngineTest {
     Command command = commandEngine.getNextCommand();
 
     assertThat(command, is(Command.HIT));
+    verify(game).getActivePlayer();
+    verify(player).getPlayingHand();
   }
 
   @Test
@@ -71,6 +76,8 @@ public class AutoCommandEngineTest {
     Command command = commandEngine.getNextCommand();
 
     assertThat(command, is(Command.STAND));
+    verify(game).getActivePlayer();
+    verify(player).getPlayingHand();
   }
 
   @Test
@@ -81,6 +88,8 @@ public class AutoCommandEngineTest {
     Command command = commandEngine.getNextCommand();
 
     assertThat(command, is(Command.STAND));
+    verify(game).getActivePlayer();
+    verify(player).getPlayingHand();
   }
 
   @Test
@@ -91,6 +100,7 @@ public class AutoCommandEngineTest {
     Command command = commandEngine.getNextCommand();
 
     assertThat(command, is(Command.SPLIT));
-
+    verify(game).getActivePlayer();
+    verify(player).getPlayingHand();
   }
 }
