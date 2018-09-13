@@ -30,5 +30,4 @@ public class AutoCommandEngine implements CommandEngine {
     }
     return Command.STAND;
   }
-
 }
