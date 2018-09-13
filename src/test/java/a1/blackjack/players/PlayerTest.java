@@ -13,7 +13,6 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -123,53 +122,17 @@ public class PlayerTest {
   public void split_normal_shouldSucceed() {
     Hand initHand = new Hand(H7, D7);
     player.setMainHand(initHand);
-    List<Card> cards = Arrays.asList(S8, CJ, SK, H5, DA, HQ);
-    deck = Deck.getDeck(cards);
 
-    player.split(deck);
+    player.split();
 
     assertThat(player.getMode(), is(PlayerMode.SPLITTING_MAIN));
-    assertThat(player.getMainHand().getCards(), contains(H7, HQ));
-    assertThat(player.getSplitHand().getCards(), contains(D7, DA));
-  }
-
-  @Test
-  public void split_blackJackAfterSplit_mainHand_shouldStand() {
-    Hand initHand = new Hand(SK, CK);
-    player.setMainHand(initHand);
-    List<Card> cards = Arrays.asList(S8, H5, HQ, DA);
-    deck = Deck.getDeck(cards);
-
-    player.split(deck);
-
-    assertThat(player.getMode(), is(PlayerMode.STANDING));
-    assertThat(player.getMainHand().getCards(), contains(SK, DA));
-    assertThat(player.getSplitHand().getCards(), contains(CK, HQ));
-  }
-
-  @Test
-  public void split_blackJackAfterSplit_splitHand_shouldStand() {
-    Hand initHand = new Hand(SK, CK);
-    player.setMainHand(initHand);
-    List<Card> cards = Arrays.asList(CJ, H5, DA, HQ);
-    deck = Deck.getDeck(cards);
-
-    player.split(deck);
-
-    assertThat(player.getMode(), is(PlayerMode.STANDING));
-    assertThat(player.getMainHand().getCards(), contains(SK, HQ));
-    assertThat(player.getSplitHand().getCards(), contains(CK, DA));
+    assertThat(player.getMainHand().getCards(), contains(H7));
+    assertThat(player.getSplitHand().getCards(), contains(D7));
   }
 
   @Test(expected = IllegalStateException.class)
   public void split_StandingMode_shouldThrow() {
     player.setMode(PlayerMode.STANDING);
-    player.split(Deck.getEmptyDeck());
-  }
-
-  @Test(expected = IllegalStateException.class)
-  public void split_deckLacksCards_shouldThrow() {
-    player.setMode(PlayerMode.STANDING);
-    player.split(Deck.getDeck(Collections.singletonList(SK)));
+    player.split();
   }
 }
