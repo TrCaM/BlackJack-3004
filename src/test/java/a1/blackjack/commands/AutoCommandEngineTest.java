@@ -20,6 +20,7 @@ import static org.mockito.Mockito.when;
 public class AutoCommandEngineTest {
   private static final Card S8 = new Card(Suit.SPADE, 8);
   private static final Card H5 = new Card(Suit.HEART, 5);
+  private static final Card S5 = new Card(Suit.SPADE, 5);
   private static final Card D7 = new Card(Suit.SPADE, 7);
   private static final Card H6 = new Card(Suit.HEART, 6);
   private static final Card DA = new Card(Suit.DIAMOND, 1);
@@ -93,8 +94,20 @@ public class AutoCommandEngineTest {
   }
 
   @Test
-  public void getNextCommand_identicalHand_shouldSplit() {
+  public void getNextCommand_identicalHandOver16_shouldStand() {
     Hand hand = new Hand(CK, SK);
+    when(player.getPlayingHand()).thenReturn(hand);
+
+    Command command = commandEngine.getNextCommand();
+
+    assertThat(command, is(Command.STAND));
+    verify(game).getActivePlayer();
+    verify(player).getPlayingHand();
+  }
+
+  @Test
+  public void getNextCommand_identicalHandLess16_shouldSplit() {
+    Hand hand = new Hand(S5, H5);
     when(player.getPlayingHand()).thenReturn(hand);
 
     Command command = commandEngine.getNextCommand();
