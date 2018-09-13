@@ -12,17 +12,17 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
 public class AutoCommandEngineTest {
   private static final Card S8 = new Card(Suit.SPADE, 8);
   private static final Card H5 = new Card(Suit.HEART, 5);
-  private static final Card C3 = new Card(Suit.CLUB, 3);
   private static final Card D7 = new Card(Suit.SPADE, 7);
-  private static final Card H7 = new Card(Suit.HEART, 7);
+  private static final Card H6 = new Card(Suit.HEART, 6);
   private static final Card DA = new Card(Suit.DIAMOND, 1);
   private static final Card SK = new Card(Suit.SPADE, 13);
-  private static final Card CJ = new Card(Suit.CLUB, 11);
   private static final Card CK = new Card(Suit.CLUB, 13);
   private static final Card HQ = new Card(Suit.HEART, 12);
 
@@ -38,7 +38,7 @@ public class AutoCommandEngineTest {
   private CommandEngine commandEngine;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     when(game.getActivePlayer()).thenReturn(player);
     commandEngine = new AutoCommandEngine(game);
   }
@@ -48,6 +48,49 @@ public class AutoCommandEngineTest {
     Hand hand = new Hand(S8, H5);
     when(player.getPlayingHand()).thenReturn(hand);
 
+    Command command = commandEngine.getNextCommand();
+
+    assertThat(command, is(Command.HIT));
+  }
+
+  @Test
+  public void getNextCommand_soft17_shouldHit() {
+    Hand hand = new Hand(DA, H6);
+    when(player.getPlayingHand()).thenReturn(hand);
+
+    Command command = commandEngine.getNextCommand();
+
+    assertThat(command, is(Command.HIT));
+  }
+
+  @Test
+  public void getNextCommand_17_shouldStand() {
+    Hand hand = new Hand(CK, D7);
+    when(player.getPlayingHand()).thenReturn(hand);
+
+    Command command = commandEngine.getNextCommand();
+
+    assertThat(command, is(Command.STAND));
+  }
+
+  @Test
+  public void getNextCommand_20_shouldStand() {
+    Hand hand = new Hand(CK, HQ);
+    when(player.getPlayingHand()).thenReturn(hand);
+
+    Command command = commandEngine.getNextCommand();
+
+    assertThat(command, is(Command.STAND));
+  }
+
+  @Test
+  public void getNextCommand_identicalHand_shouldSplit() {
+    Hand hand = new Hand(CK, SK);
+    when(player.getPlayingHand()).thenReturn(hand);
+
+    Command command = commandEngine.getNextCommand();
+
+    assertThat(command, is(Command.SPLIT));
 
   }
 }
