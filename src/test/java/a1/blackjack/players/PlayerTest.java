@@ -36,7 +36,7 @@ public class PlayerTest {
   private Player player;
 
   @Mock
-  CommandEngine commandEngine;
+  private CommandEngine commandEngine;
 
   @Rule
   public MockitoRule mockitoRule = MockitoJUnit.rule();
