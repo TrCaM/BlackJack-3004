@@ -70,7 +70,7 @@ public class PlayerTest {
   }
 
   @Test
-  public void hit_mainSplitingMode_shouldSucceed() {
+  public void hit_mainSplittingMode_shouldSucceed() {
     player.setMode(PlayerMode.SPLITTING_MAIN);
     List<Card> cards = Arrays.asList(D7, CJ, HQ);
     deck = Deck.getDeck(cards);
