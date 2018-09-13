@@ -29,6 +29,10 @@ public class Player {
     return splitHand;
   }
 
+  public Hand getPlayingHand() {
+    return mode == PlayerMode.SPLITTING_HAND ? splitHand : mainHand;
+  }
+
   PlayerMode getMode() {
     return mode;
   }
