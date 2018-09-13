@@ -19,7 +19,6 @@ public class Player {
     splitHand = new Hand();
     this.commandEngine = commandEngine;
     this.mode = PlayerMode.NORMAL;
-    commandEngine.setup(this);
   }
 
   public Hand getMainHand() {
