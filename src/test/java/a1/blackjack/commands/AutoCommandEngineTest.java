@@ -42,7 +42,7 @@ public class AutoCommandEngineTest {
   @Before
   public void setUp() {
     when(game.getActivePlayer()).thenReturn(player);
-    commandEngine = new AutoCommandEngine(game);
+    commandEngine = new AutoCommandEngine();
   }
 
   @Test
@@ -50,7 +50,7 @@ public class AutoCommandEngineTest {
     Hand hand = new Hand(S8, H5);
     when(player.getPlayingHand()).thenReturn(hand);
 
-    Command command = commandEngine.getNextCommand();
+    Command command = commandEngine.getNextCommand(game);
 
     assertThat(command, is(Command.HIT));
     verify(game).getActivePlayer();
@@ -62,7 +62,7 @@ public class AutoCommandEngineTest {
     Hand hand = new Hand(DA, H6);
     when(player.getPlayingHand()).thenReturn(hand);
 
-    Command command = commandEngine.getNextCommand();
+    Command command = commandEngine.getNextCommand(game);
 
     assertThat(command, is(Command.HIT));
     verify(game).getActivePlayer();
@@ -74,7 +74,7 @@ public class AutoCommandEngineTest {
     Hand hand = new Hand(CK, D7);
     when(player.getPlayingHand()).thenReturn(hand);
 
-    Command command = commandEngine.getNextCommand();
+    Command command = commandEngine.getNextCommand(game);
 
     assertThat(command, is(Command.STAND));
     verify(game).getActivePlayer();
@@ -86,7 +86,7 @@ public class AutoCommandEngineTest {
     Hand hand = new Hand(CK, HQ);
     when(player.getPlayingHand()).thenReturn(hand);
 
-    Command command = commandEngine.getNextCommand();
+    Command command = commandEngine.getNextCommand(game);
 
     assertThat(command, is(Command.STAND));
     verify(game).getActivePlayer();
@@ -98,7 +98,7 @@ public class AutoCommandEngineTest {
     Hand hand = new Hand(CK, SK);
     when(player.getPlayingHand()).thenReturn(hand);
 
-    Command command = commandEngine.getNextCommand();
+    Command command = commandEngine.getNextCommand(game);
 
     assertThat(command, is(Command.STAND));
     verify(game).getActivePlayer();
@@ -110,7 +110,7 @@ public class AutoCommandEngineTest {
     Hand hand = new Hand(S5, H5);
     when(player.getPlayingHand()).thenReturn(hand);
 
-    Command command = commandEngine.getNextCommand();
+    Command command = commandEngine.getNextCommand(game);
 
     assertThat(command, is(Command.SPLIT));
     verify(game).getActivePlayer();

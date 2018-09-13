@@ -12,14 +12,8 @@ import a1.blackjack.game.Game;
  * - If the hand has a score of 17 or more, it will stand.
  */
 public class AutoCommandEngine implements CommandEngine {
-  private Game game;
-
-  public AutoCommandEngine(Game game) {
-    this.game = game;
-  }
-
   @Override
-  public Command getNextCommand() {
+  public Command getNextCommand(Game game) {
     Hand activeHand = game.getActivePlayer().getPlayingHand();
     int handScore = activeHand.getHandScore();
     if (handScore < 17 && activeHand.canSplit()) {
