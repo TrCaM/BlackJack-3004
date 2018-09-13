@@ -99,21 +99,15 @@ public class Player {
    * (this method does not check this condition). Each hand will contain 1 of the originals and draw
    * 1 more extra. If blackjack happens then the player mode should go STANDING.
    */
-  void split(Deck deck) {
-    validatePlayerStateForSplit(deck);
+  void split() {
+    validatePlayerStateForSplit();
     splitHand.addCard(mainHand.removeCard(1));
-    mainHand.addCard(deck.draw());
-    splitHand.addCard(deck.draw());
-    mode = (mainHand.isBlackjack() || splitHand.isBlackjack())
-        ? PlayerMode.STANDING : PlayerMode.SPLITTING_MAIN;
+    mode = PlayerMode.SPLITTING_MAIN;
   }
 
-  private void validatePlayerStateForSplit(Deck deck) {
+  private void validatePlayerStateForSplit() {
     if (mode == PlayerMode.STANDING) {
       throw new IllegalStateException("Split while standing");
-    }
-    if (deck.size() < 2) {
-      throw new IllegalStateException("Split needs deck to have at least 2 cards");
     }
   }
 
