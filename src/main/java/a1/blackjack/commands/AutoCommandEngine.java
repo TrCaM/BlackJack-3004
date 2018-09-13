@@ -1,6 +1,6 @@
 package a1.blackjack.commands;
 
-import a1.blackjack.game.GameState;
+import a1.blackjack.game.Game;
 
 /**
  * Automatically generate commands base on the current player's hand. It needs to access the state
@@ -8,10 +8,10 @@ import a1.blackjack.game.GameState;
  * command.
  */
 public class AutoCommandEngine implements CommandEngine{
-  private GameState gameState;
+  private Game game;
 
-  public AutoCommandEngine(GameState state) {
-    this.gameState = state;
+  public AutoCommandEngine(Game game) {
+    this.game = game;
   }
 
   @Override
