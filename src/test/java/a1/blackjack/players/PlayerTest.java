@@ -20,15 +20,10 @@ import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertThat;
 
 public class PlayerTest {
-  private static final Card S8 = new Card(Suit.SPADE, 8);
-  private static final Card H5 = new Card(Suit.HEART, 5);
   private static final Card C3 = new Card(Suit.CLUB, 3);
   private static final Card D7 = new Card(Suit.SPADE, 7);
   private static final Card H7 = new Card(Suit.HEART, 7);
-  private static final Card DA = new Card(Suit.DIAMOND, 1);
-  private static final Card SK = new Card(Suit.SPADE, 13);
   private static final Card CJ = new Card(Suit.CLUB, 11);
-  private static final Card CK = new Card(Suit.CLUB, 13);
   private static final Card HQ = new Card(Suit.HEART, 12);
 
   private Deck deck;
