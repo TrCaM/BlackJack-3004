@@ -43,7 +43,12 @@ public class Card{
   public boolean isUp() {
     return this.isUp;
   }
-  public boolean equals(Card anotherCard) {
-    return this.suit == anotherCard.suit && this.value == anotherCard.value;
+
+  @Override
+  public boolean equals(Object other) {
+    if (!(other instanceof  Card))
+      return false;
+    Card otherCard = (Card)other;
+    return value == otherCard.value && suit == otherCard.suit;
   }
 }
