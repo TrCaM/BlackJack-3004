@@ -6,7 +6,6 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -18,7 +17,7 @@ public class TextConsoleTest {
   @Test
   public void promptCommand_shouldSucceed() {
     InputStream in = new ByteArrayInputStream("D S H".getBytes());
-    textConsole = new TextConsole(new Scanner(in));
+    textConsole = new TextConsole(in);
     Set<Command> availableCommands = new HashSet<>();
     availableCommands.add(Command.STAND);
     availableCommands.add(Command.HIT);
@@ -32,7 +31,7 @@ public class TextConsoleTest {
   @Test(expected = IllegalArgumentException.class)
   public void promptCommand_invalidCommandThrow() {
     InputStream in = new ByteArrayInputStream("SK".getBytes());
-    textConsole = new TextConsole(new Scanner(in));
+    textConsole = new TextConsole(in);
     Set<Command> availableCommands = new HashSet<>();
     availableCommands.add(Command.STAND);
     availableCommands.add(Command.HIT);

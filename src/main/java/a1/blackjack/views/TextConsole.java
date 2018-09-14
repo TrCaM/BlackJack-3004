@@ -25,14 +25,6 @@ public class TextConsole implements Console {
     shouldShowInfo = true;
   }
 
-  /**
-   * Package-private constructor used for testing.
-   */
-  TextConsole(Scanner scanner) {
-    this.scanner = scanner;
-    shouldShowInfo = true;
-  }
-
   @Override
   public Command promptCommand(Set<Command> availableCommands) {
     if (shouldShowInfo) {
