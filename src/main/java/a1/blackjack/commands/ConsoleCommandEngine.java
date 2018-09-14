@@ -38,7 +38,7 @@ public class ConsoleCommandEngine implements CommandEngine {
       }
       chosenCommand =  fileCommandsQueue.remove();
     } else {
-      chosenCommand = console.promptCommand();
+      chosenCommand = console.promptCommand(availableCommands);
     }
     if (!availableCommands.contains(chosenCommand)) {
       throw new IllegalStateException(String.format("Cannot choose command: %s", chosenCommand));

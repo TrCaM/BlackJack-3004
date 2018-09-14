@@ -79,7 +79,7 @@ public class ConsoleCommandEngineTest {
     Hand hand = new Hand(S5, H5);
     when(game.getActivePlayer()).thenReturn(player);
     when(player.getPlayingHand()).thenReturn(hand);
-    when(console.promptCommand()).thenReturn(Command.SPLIT);
+    when(console.promptCommand(any())).thenReturn(Command.SPLIT);
     commandEngine = new ConsoleCommandEngine(console);
 
     Command chosenCommand1 = commandEngine.getNextCommand(game);
@@ -87,7 +87,7 @@ public class ConsoleCommandEngineTest {
     assertThat(chosenCommand1, is(Command.SPLIT));
     verify(game).getActivePlayer();
     verify(player).getPlayingHand();
-    verify(console).promptCommand();
+    verify(console).promptCommand(any());
   }
 
   @Test(expected = IllegalStateException.class)
@@ -95,7 +95,7 @@ public class ConsoleCommandEngineTest {
     Hand hand = new Hand(S8, H5);
     when(game.getActivePlayer()).thenReturn(player);
     when(player.getPlayingHand()).thenReturn(hand);
-    when(console.promptCommand()).thenReturn(Command.SPLIT);
+    when(console.promptCommand(any())).thenReturn(Command.SPLIT);
     commandEngine = new ConsoleCommandEngine(console);
 
     commandEngine.getNextCommand(game);
