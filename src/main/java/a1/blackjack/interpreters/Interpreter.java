@@ -15,7 +15,6 @@ public class Interpreter {
     throw new UnsupportedOperationException();
   }
 
-
   /**
    * Interpret input string to proper {@link Card}.
    * @param text the input card string
