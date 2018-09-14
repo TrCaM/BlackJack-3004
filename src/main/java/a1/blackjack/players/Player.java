@@ -1,6 +1,5 @@
 package a1.blackjack.players;
 
-import a1.blackjack.cards.Card;
 import a1.blackjack.cards.Deck;
 import a1.blackjack.cards.Hand;
 import a1.blackjack.commands.CommandEngine;
@@ -13,12 +12,14 @@ public class Player {
   private Hand splitHand;
   private CommandEngine commandEngine;
   private PlayerMode mode;
+  private String name;
 
-  Player(CommandEngine commandEngine) {
+  public Player(CommandEngine commandEngine, String name) {
     mainHand = new Hand();
     splitHand = new Hand();
     this.commandEngine = commandEngine;
     this.mode = PlayerMode.NORMAL;
+    this.name =name;
   }
 
   public Hand getMainHand() {
@@ -42,6 +43,21 @@ public class Player {
   }
 
   /**
+   * Draw a card to the proper hand from the deck.
+   */
+  public void draw(Deck deck) {
+    Hand hand;
+    switch (mode) {
+      case SPLITTING_HAND:
+        hand = splitHand;
+        break;
+      default:
+        hand = mainHand;
+    }
+    hand.addCard(deck.draw());
+  }
+
+  /**
    * Draw a card from the deck and calculate that next state by analyzing the hand
    * - Validate if the hit action is valid, otherwise throw
    * - Draw a card and add to the hand based on the current mode:
@@ -51,9 +67,8 @@ public class Player {
    */
   void hit(Deck deck) {
     validatePlayerStateForHit(deck);
-    Card drawCard = deck.draw();
-    Hand addedHand = addCardToHand(drawCard);
-    if (addedHand.isBust()) {
+    draw(deck);
+    if (getPlayingHand().isBust()) {
       stand();
     }
   }
@@ -65,22 +80,6 @@ public class Player {
     if (deck.size() == 0) {
       throw new IllegalStateException("Hit while deck is empty");
     }
-  }
-
-  /**
-   * Add card to the proper hand and return that hand
-   */
-  private Hand addCardToHand(Card drawCard) {
-    Hand hand;
-    switch (mode) {
-      case SPLITTING_HAND:
-        hand = splitHand;
-        break;
-      default:
-        hand = mainHand;
-    }
-    hand.addCard(drawCard);
-    return hand;
   }
 
   void stand() {
