@@ -4,6 +4,9 @@ import a1.blackjack.commands.Command;
 
 import java.util.Set;
 
+/**
+ * Interface for the view of the game (text or graphics).
+ */
 public interface Console {
-  public Command promptCommand(Set<Command> availableCommands);
+  Command promptCommand(Set<Command> availableCommands);
 }
