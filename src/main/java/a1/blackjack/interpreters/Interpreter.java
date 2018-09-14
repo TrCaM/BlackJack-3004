@@ -5,7 +5,7 @@ import a1.blackjack.cards.Suit;
 import a1.blackjack.commands.Command;
 
 /**
- * The interpreter to transform different types of input to {@link Command}
+ * The interpreter to transform different types of input to {@link Command} or {@link Card}
  */
 public class Interpreter {
   /**
