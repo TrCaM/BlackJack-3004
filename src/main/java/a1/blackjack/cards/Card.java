@@ -51,4 +51,9 @@ public class Card{
     Card otherCard = (Card)other;
     return value == otherCard.value && suit == otherCard.suit;
   }
+
+  @Override
+  public String toString() {
+    return null;
+  }
 }
