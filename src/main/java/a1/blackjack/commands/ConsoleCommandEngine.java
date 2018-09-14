@@ -34,14 +34,14 @@ public class ConsoleCommandEngine implements CommandEngine {
     Command chosenCommand;
     if (isUsingFile) {
       if (fileCommandsQueue.isEmpty()) {
-        throw new IllegalStateException("File input doesn't provide enough commands");
+        throw new IllegalArgumentException("File input doesn't provide enough commands");
       }
       chosenCommand =  fileCommandsQueue.remove();
     } else {
       chosenCommand = console.promptCommand(availableCommands);
     }
     if (!availableCommands.contains(chosenCommand)) {
-      throw new IllegalStateException(String.format("Cannot choose command: %s", chosenCommand));
+      throw new IllegalArgumentException(String.format("Cannot choose command: %s", chosenCommand));
     }
     return chosenCommand;
   }

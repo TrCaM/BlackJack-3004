@@ -63,7 +63,7 @@ public class ConsoleCommandEngineTest {
     verifyZeroInteractions(console);
   }
 
-  @Test(expected = IllegalStateException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void getNextCommand_usingFile_queueError() {
     Hand hand = new Hand(S8, H5);
     when(game.getActivePlayer()).thenReturn(player);
@@ -90,7 +90,7 @@ public class ConsoleCommandEngineTest {
     verify(console).promptCommand(any());
   }
 
-  @Test(expected = IllegalStateException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void getNextCommand_chosenCommandNotAvailable_shouldThrow() {
     Hand hand = new Hand(S8, H5);
     when(game.getActivePlayer()).thenReturn(player);
