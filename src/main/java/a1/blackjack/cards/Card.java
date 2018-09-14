@@ -54,6 +54,37 @@ public class Card{
 
   @Override
   public String toString() {
-    return null;
+    return toSuitString() + toValueString();
+  }
+
+  private String toSuitString() {
+    switch (suit) {
+      case SPADE:
+        return "S";
+      case HEART:
+        return "H";
+      case DIAMOND:
+        return "D";
+      case CLUB:
+        return "C";
+      default:
+        throw new IllegalStateException("Invalid suit");
+    }
+  }
+
+  private String toValueString() {
+    if (value == 1) {
+      return "A";
+    }
+    if (value == 11) {
+      return "J";
+    }
+    if (value == 12) {
+      return "Q";
+    }
+    if (value == 13) {
+      return "K";
+    }
+    return Integer.toString(value);
   }
 }

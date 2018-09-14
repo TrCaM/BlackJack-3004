@@ -26,7 +26,7 @@ public class CardTest {
     assertThat(new Card(Suit.HEART, 10).toString(), is("H10"));
     assertThat(new Card(Suit.DIAMOND, 5).toString(), is("D5"));
     assertThat(new Card(Suit.DIAMOND, 11).toString(), is("DJ"));
-    assertThat(new Card(Suit.CLUB, 13).toString(), is("SK"));
-    assertThat(new Card(Suit.CLUB, 12).toString(), is("SQ"));
+    assertThat(new Card(Suit.CLUB, 13).toString(), is("CK"));
+    assertThat(new Card(Suit.CLUB, 12).toString(), is("CQ"));
   }
 }
