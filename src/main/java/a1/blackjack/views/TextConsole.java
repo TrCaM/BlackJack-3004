@@ -2,7 +2,6 @@ package a1.blackjack.views;
 
 import a1.blackjack.commands.Command;
 import a1.blackjack.interpreters.Interpreter;
-import org.apache.log4j.Logger;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -12,7 +11,6 @@ import java.util.Set;
  * The view of the game using text-based interface.
  */
 public class TextConsole implements Console {
-  private static Logger logger = Logger.getLogger(TextConsole.class);
   private Scanner scanner;
   private boolean shouldShowInfo;
 
@@ -28,13 +26,13 @@ public class TextConsole implements Console {
   @Override
   public Command promptCommand(Set<Command> availableCommands) {
     if (shouldShowInfo) {
-      logger.info(getPromptMessage(availableCommands));
+      System.out.println(getPromptMessage(availableCommands));
     }
     return Interpreter.commandInterpret(scanner.next());
   }
 
   private String getPromptMessage(Set<Command> availableCommands) {
-    StringBuilder sb = new StringBuilder("Make your next move:\n\t");
+    StringBuilder sb = new StringBuilder("Make your next move:\n");
     availableCommands.forEach(command -> sb.append(getPromptString(command)));
     return sb.toString();
   }
@@ -42,11 +40,11 @@ public class TextConsole implements Console {
   private String getPromptString(Command command) {
     switch (command) {
       case STAND:
-        return "- STAND --> S\n";
+        return "\t- STAND --> S\n";
       case HIT:
-        return "- HIT   --> H\n";
+        return "\t- HIT   --> H\n";
       case SPLIT:
-        return "- SPLIT --> D\n";
+        return "\t- SPLIT --> D\n";
       default:
         throw new IllegalStateException("Never happens");
     }
