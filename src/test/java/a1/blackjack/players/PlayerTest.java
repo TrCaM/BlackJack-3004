@@ -37,7 +37,28 @@ public class PlayerTest {
 
   @Before
   public void setUp() {
-    player = new Player(commandEngine);
+    player = new Player(commandEngine, "player");
+  }
+
+  @Test
+  public void drawCard_normalMode_shouldSucceed() {
+    List<Card> cards = Arrays.asList(D7, C3, HQ);
+    deck = Deck.getDeck(cards);
+    for (int i = 0; i < 2; i++) {
+      player.hit(deck);
+    }
+    Hand hand = player.getMainHand();
+    assertThat(hand.getCards(), contains(HQ, C3));
+  }
+
+  @Test
+  public void drawCard_splitMode_shouldSucceed() {
+    player.setMode(PlayerMode.SPLITTING_HAND);
+    List<Card> cards = Arrays.asList(D7, C3, HQ);
+    deck = Deck.getDeck(cards);
+    player.hit(deck);
+    Hand hand = player.getSplitHand();
+    assertThat(hand.getCards(), contains(HQ));
   }
 
   @Test
