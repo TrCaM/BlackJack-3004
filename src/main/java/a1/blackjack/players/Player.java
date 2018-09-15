@@ -37,7 +37,7 @@ public class Player {
     return mode == PlayerMode.SPLITTING_HAND ? splitHand : mainHand;
   }
 
-  PlayerMode getMode() {
+  public PlayerMode getMode() {
     return mode;
   }
 
@@ -70,7 +70,7 @@ public class Player {
    * + Otherwise add to the normal hand
    * - If the hand is busted then do stand
    */
-  void hit(Deck deck) {
+  public void hit(Deck deck) {
     console.notify(String.format("%s hits", name));
     validatePlayerStateForHit(deck);
     draw(deck);
@@ -89,7 +89,7 @@ public class Player {
     }
   }
 
-  void stand() {
+  public void stand() {
     console.notify(String.format("%s stands", name));
     switch (mode) {
       case NORMAL:
@@ -107,7 +107,7 @@ public class Player {
    * (this method does not check this condition). Each hand will contain 1 of the originals and draw
    * 1 more extra. If blackjack happens then the player mode should go STANDING.
    */
-  void split() {
+  public void split() {
     console.notify(String.format("%s splits", name));
     validatePlayerStateForSplit();
     splitHand.addCard(mainHand.removeCard(1));
