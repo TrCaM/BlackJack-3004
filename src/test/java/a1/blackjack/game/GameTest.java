@@ -135,5 +135,43 @@ public class GameTest {
     assertThat(dealer.getMode(), is(PlayerMode.STANDING));
     assertThat(player.getScore(), is(20));
     assertThat(dealer.getScore(), is(19));
+    assertThat(game.getWinner(), is(player));
+  }
+
+  @Test
+  public void playTurn_dealerSplitHand() {
+    deck = Deck.getDeck(Arrays.asList(
+        new Card(Suit.DIAMOND, 2),
+        new Card(Suit.SPADE, 12),
+        new Card(Suit.SPADE, 1),
+        new Card(Suit.CLUB, 12),
+        new Card(Suit.HEART, 7),
+        new Card(Suit.DIAMOND, 5),
+        new Card(Suit.CLUB, 5),
+        new Card(Suit.HEART, 9),
+        new Card(Suit.SPADE, 13)
+    ));
+    Queue<Command> commandQueue = new LinkedList<>();
+    commandQueue.add(Command.STAND);
+    deck.getCards().forEach(Card::faceDown);
+    game = Game.initFileInputGame(new TextConsole(), commandQueue, deck);
+    Player player = game.getPlayer();
+    Player dealer = game.getDealer();
+
+    for (int i=0; i<2; i++) {
+      player.draw(deck, true);
+    }
+    for (int i=0; i<2; i++) {
+      dealer.draw(deck, true);
+    }
+
+    game.playTurn(player);
+    game.playTurn(dealer);
+
+    assertThat(player.getMode(), is(PlayerMode.STANDING));
+    assertThat(dealer.getMode(), is(PlayerMode.STANDING));
+    assertThat(player.getScore(), is(19));
+    assertThat(dealer.getScore(), is(18));
+    assertThat(game.getWinner(), is(player));
   }
 }
