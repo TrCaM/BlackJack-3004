@@ -123,6 +123,7 @@ public class Player {
     switch (mode) {
       case NORMAL:
       case SPLITTING_HAND:
+      case STANDING:
         mode = PlayerMode.STANDING;
         break;
       default:

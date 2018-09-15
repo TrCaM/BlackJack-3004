@@ -64,6 +64,36 @@ public class Game {
     return game;
   }
 
+  /**
+   * Start the game after it is initialized.
+   */
+  public void start() {
+    console.notify("Welcome to the simple blackjack!!!");
+    // Draw 2 cards for each player.
+    for (int i=0; i<2; i++) {
+      player.draw(deck, false);
+    }
+    for (int i=0; i<2; i++) {
+      dealer.draw(deck, false);
+    }
+    // Player's turn
+    beforePlayerTurn();
+    if (dealer.getMainHand().isBlackjack()) {
+      console.notify("Dealer has a blackjack hand!!!");
+    } else if (player.getMainHand().isBlackjack()) {
+      console.notify("Player has a blackjack hand!!!");
+    } else {
+      playTurn(player);
+      // Dealer plays if the player does not bust
+      beforeDealerTurn();
+      if (!player.isBusted()) {
+        playTurn(dealer);
+      }
+    }
+    // Get winner and end the game.
+    endGame();
+  }
+
   void beforePlayerTurn() {
     // Reveal player hand.
     player.getPlayingHand().getCards().forEach(Card::faceUp);
@@ -114,11 +144,17 @@ public class Game {
   }
 
   private void endGame() {
+    if (player.getMode() != PlayerMode.STANDING) {
+      player.stand();
+    }
+    if (dealer.getMode() != PlayerMode.STANDING) {
+      dealer.stand();
+    }
     player.getPlayingHand().getCards().forEach(Card::faceUp);
     dealer.getPlayingHand().getCards().forEach(Card::faceUp);
     showPlayersHands();
     showPlayersScore();
-    console.notify(String.format("%s has won!!!!", getWinner()));
+    console.notify(String.format("%s has won!!!!", getWinner().getName()));
   }
 
   private void showPlayersHands() {
