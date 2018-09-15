@@ -3,7 +3,9 @@ package a1.blackjack.game;
 import a1.blackjack.cards.Card;
 import a1.blackjack.cards.Deck;
 import a1.blackjack.cards.Hand;
+import a1.blackjack.commands.Command;
 import a1.blackjack.players.Player;
+import a1.blackjack.players.PlayerMode;
 import a1.blackjack.views.Console;
 
 /**
@@ -42,11 +44,48 @@ public class Game {
     isPlayerTurn = true;
   }
 
-  private void beforeDealerTurn() {
+  void beforeDealerTurn() {
     dealer.getPlayingHand().getCards().forEach(Card::faceUp);
     isPlayerTurn = false;
     showPlayersHands();
   }
+
+  void playTurn(Player player) {
+    console.notify(String.format("It's %s's turn", player.getName()));
+    while (player.getMode() != PlayerMode.STANDING) {
+      try {
+        // This happens in split mode
+        if (player.getPlayingHand().hasLessThan2Cards()) {
+          player.draw(deck, true);
+        }
+        if (player.getPlayingHand().isBlackjack()) {
+          console.notify(String.format("%s gets a blackjack hand!!", player.getName()));
+          player.stand();
+        } else {
+          executeCommand(player, player.getCommandEngine().getNextCommand(this));
+        }
+        showPlayerHands(player);
+      } catch (IllegalArgumentException e) {
+        console.notify(e.getMessage());
+        console.notify("Please try again");
+      }
+    }
+  }
+
+  private void executeCommand(Player player, Command command) {
+    switch (command) {
+      case HIT:
+        player.hit(deck);
+        break;
+      case SPLIT:
+        player.split();
+        break;
+      default:
+        player.stand();
+    }
+  }
+
+
 
   private void showPlayersHands() {
     console.notify("---------------------------------------");
