@@ -81,7 +81,7 @@ public class Player {
     }
     Card card = deck.draw();
     hand.addCard(card);
-    console.notify(String.format("%s has draw %s", name, card));
+    console.notify(String.format("%s has draw a card", name));
   }
 
   /**
