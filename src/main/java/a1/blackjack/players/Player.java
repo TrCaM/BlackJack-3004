@@ -32,16 +32,20 @@ public class Player {
     return name;
   }
 
-  Hand getMainHand() {
+  public Hand getMainHand() {
     return mainHand;
   }
 
-  Hand getSplitHand() {
+  public Hand getSplitHand() {
     return splitHand;
   }
 
   public Hand getPlayingHand() {
     return mode == PlayerMode.SPLITTING_HAND ? splitHand : mainHand;
+  }
+
+  public boolean isSplitting() {
+    return isSplitting;
   }
 
   public PlayerMode getMode() {
@@ -81,7 +85,7 @@ public class Player {
     }
     Card card = deck.draw();
     hand.addCard(card);
-    console.notify(String.format("%s has draw a card", name));
+    console.notify(String.format("%s has drawn a card", name));
   }
 
   /**
