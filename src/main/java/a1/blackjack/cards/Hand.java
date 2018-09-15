@@ -58,7 +58,7 @@ public class Hand {
     return score;
   }
 
-  public boolean isBust() {
+  public boolean isBusted() {
     return getHandScore() > 21;
   }
 
