@@ -40,4 +40,10 @@ public class Game {
     showPlayersHands();
     isPlayerTurn = true;
   }
+
+  private void beforeDealerTurn() {
+    dealer.getPlayingHand().getCards().forEach(Card::faceUp);
+    isPlayerTurn = false;
+    showPlayersHands();
+  }
 }
