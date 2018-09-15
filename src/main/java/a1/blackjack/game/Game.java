@@ -2,6 +2,7 @@ package a1.blackjack.game;
 
 import a1.blackjack.cards.Card;
 import a1.blackjack.cards.Deck;
+import a1.blackjack.cards.Hand;
 import a1.blackjack.players.Player;
 import a1.blackjack.views.Console;
 
@@ -45,5 +46,43 @@ public class Game {
     dealer.getPlayingHand().getCards().forEach(Card::faceUp);
     isPlayerTurn = false;
     showPlayersHands();
+  }
+
+  private void showPlayersHands() {
+    console.notify("---------------------------------------");
+    showPlayerHands(player);
+    showPlayerHands(dealer);
+    console.notify("---------------------------------------");
+  }
+
+  private void showPlayerHands(Player player) {
+    console.notify(String.format("%s's hand contains: ", player.getName()));
+    console.notify("\t- Main hand contains:");
+    displayHand(player.getMainHand());
+    if (player.isSplitting()) {
+      console.notify("\t- Second hand contains:");
+      displayHand(player.getSplitHand());
+    }
+  }
+
+  private void displayHand(Hand hand) {
+    StringBuilder sb = new StringBuilder();
+    hand.getCards().forEach(card -> sb.append("\t\t+ ").append(card).append("\n"));
+    console.notify(sb.toString());
+  }
+
+  private void showPlayersScore() {
+    showPlayerScore(player);
+    showPlayerScore(dealer);
+  }
+
+  private void showPlayerScore(Player player) {
+    StringBuilder sb = new StringBuilder();
+    if (player.isBusted()) {
+      sb.append(player.getName()).append(" is busted.");
+    } else {
+      sb.append(player.getName()).append("'s score is ").append(player.getScore());
+    }
+    console.notify(sb.toString());
   }
 }
