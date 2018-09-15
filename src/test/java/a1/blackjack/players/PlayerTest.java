@@ -76,6 +76,36 @@ public class PlayerTest {
   }
 
   @Test
+  public void isBusted_normalCase_returnTrue() {
+    Hand mainHand = new Hand(HQ, CJ, C3);
+    player.setSplitting(false);
+    player.setMainHand(mainHand);
+
+    assertThat(player.isBusted(), is(true));
+  }
+
+  @Test
+  public void isBusted_splitting_returnTrue() {
+    Hand mainHand = new Hand(HQ, CJ, C3);
+    Hand splitHand = new Hand(HQ, D7, CJ);
+    player.setSplitting(true);
+    player.setMainHand(mainHand);
+    player.setSplitHand(splitHand);
+
+    assertThat(player.isBusted(), is(true));
+  }
+
+  @Test
+  public void isBusted_splitting_returnFalse() {
+    Hand mainHand = new Hand(HQ, CJ, C3);
+    Hand splitHand = new Hand(HQ, D7);
+    player.setSplitting(true);
+    player.setMainHand(mainHand);
+    player.setSplitHand(splitHand);
+
+    assertThat(player.isBusted(), is(false));
+  }
+  @Test
   public void drawCard_normalMode_shouldSucceed() {
     List<Card> cards = Arrays.asList(D7, C3, HQ);
     deck = Deck.getDeck(cards);
@@ -105,6 +135,7 @@ public class PlayerTest {
     }
     Hand hand = player.getMainHand();
     assertThat(hand.getCards(), contains(HQ, C3, D7));
+    assertThat(player.isBusted(), is(false));
     assertThat(player.getMode(), is(PlayerMode.NORMAL));
   }
 
@@ -117,6 +148,7 @@ public class PlayerTest {
     }
     Hand hand = player.getMainHand();
     assertThat(hand.getCards(), contains(HQ, CJ, D7));
+    assertThat(player.isBusted(), is(true));
     assertThat(player.getMode(), is(PlayerMode.STANDING));
   }
 
@@ -130,6 +162,7 @@ public class PlayerTest {
     }
     Hand hand = player.getMainHand();
     assertThat(hand.getCards(), contains(HQ, CJ, D7));
+    assertThat(player.isBusted(), is(true));
     assertThat(player.getMode(), is(PlayerMode.SPLITTING_HAND));
   }
 
