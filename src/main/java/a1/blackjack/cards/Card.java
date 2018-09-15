@@ -54,7 +54,7 @@ public class Card{
 
   @Override
   public String toString() {
-    return toSuitString() + toValueString();
+    return isUp ? toSuitString() + toValueString() : "[Hidden]";
   }
 
   private String toSuitString() {
