@@ -1,8 +1,9 @@
 package a1.blackjack.game;
 
+import a1.blackjack.cards.Card;
 import a1.blackjack.cards.Deck;
-import a1.blackjack.commands.Command;
 import a1.blackjack.players.Player;
+import a1.blackjack.views.Console;
 
 /**
  * {@link Game} class is responsible for or the game logic.
@@ -13,27 +14,30 @@ public class Game {
   private Deck deck;
   private boolean isPlayerTurn;
 
+  private Console console;
+
+  private Game(Console console) {
+    this.console = console;
+  }
+
   public Player getActivePlayer() {
     return isPlayerTurn ? player : dealer;
   }
 
-  private void initGame() {
-    throw new UnsupportedOperationException();
+  Player getPlayer() {
+    return player;
   }
 
-  private void playTurn(Player player) {
-
+  Player getDealer() {
+    return dealer;
   }
 
-  private void validateStateForEvent() {
-    throw new UnsupportedOperationException();
-  }
-
-  private Command getCommand() {
-    throw new UnsupportedOperationException();
-  }
-
-  private void executeCommand() {
-    throw new UnsupportedOperationException();
+  void beforePlayerTurn() {
+    // Reveal player hand.
+    player.getPlayingHand().getCards().forEach(Card::faceUp);
+    // Reveal only 1 card of dealer's hand
+    dealer.getPlayingHand().getCards().get(0).faceUp();
+    showPlayersHands();
+    isPlayerTurn = true;
   }
 }
