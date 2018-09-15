@@ -16,6 +16,7 @@ public class Player {
   private PlayerMode mode;
   private String name;
   private Console console;
+  private boolean isSplitting;
 
   public Player(CommandEngine commandEngine, Console console, String name) {
     mainHand = new Hand();
@@ -24,6 +25,7 @@ public class Player {
     this.commandEngine = commandEngine;
     this.mode = PlayerMode.NORMAL;
     this.name =name;
+    isSplitting = false;
   }
 
   public String getName() {
@@ -58,6 +60,13 @@ public class Player {
     return Math.max(mainHandScore, splitHandScore);
   }
 
+  public boolean isBusted() {
+    if (isSplitting) {
+      return mainHand.isBusted() && splitHand.isBusted();
+    }
+    return mainHand.isBusted();
+  }
+
   /**
    * Draw a card to the proper hand from the deck.
    */
@@ -87,8 +96,8 @@ public class Player {
     console.notify(String.format("%s hits", name));
     validatePlayerStateForHit(deck);
     draw(deck);
-    if (getPlayingHand().isBust()) {
-      console.notify(String.format("%s busts", name));
+    if (getPlayingHand().isBusted()) {
+      console.notify(String.format("%s busts this hand", name));
       stand();
     }
   }
@@ -124,6 +133,7 @@ public class Player {
     console.notify(String.format("%s splits", name));
     validatePlayerStateForSplit();
     splitHand.addCard(mainHand.removeCard(1));
+    isSplitting = true;
     mode = PlayerMode.SPLITTING_MAIN;
   }
 
@@ -144,5 +154,9 @@ public class Player {
 
   void setSplitHand(Hand hand) {
     splitHand = hand;
+  }
+
+  void setSplitting(boolean isSplitting) {
+    this.isSplitting = isSplitting;
   }
 }
