@@ -74,7 +74,7 @@ public class Player {
   /**
    * Draw a card to the proper hand from the deck.
    */
-  public void draw(Deck deck) {
+  public void draw(Deck deck, boolean shouldOpen) {
     Hand hand;
     switch (mode) {
       case SPLITTING_HAND:
@@ -84,8 +84,11 @@ public class Player {
         hand = mainHand;
     }
     Card card = deck.draw();
+    if (shouldOpen) {
+      card.faceUp();
+    }
     hand.addCard(card);
-    console.notify(String.format("%s has drawn a card", name));
+    console.notify(String.format("%s has drawn a card: %s", name, card));
   }
 
   /**
@@ -99,7 +102,7 @@ public class Player {
   public void hit(Deck deck) {
     console.notify(String.format("%s hits", name));
     validatePlayerStateForHit(deck);
-    draw(deck);
+    draw(deck, true);
     if (getPlayingHand().isBusted()) {
       console.notify(String.format("%s busts this hand", name));
       stand();
