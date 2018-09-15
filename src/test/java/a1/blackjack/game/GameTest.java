@@ -46,4 +46,25 @@ public class GameTest {
     assertThat(dealer.getMainHand().getCards().get(0).isUp(), is(true));
     assertThat(dealer.getMainHand().getCards().get(1).isUp(), is(false));
   }
+
+  @Test
+  public void beforeDealerTurn_cardsOpenCorrectly() {
+    Player player = game.getPlayer();
+    Player dealer = game.getDealer();
+    Deck deck = Deck.getDeck(Arrays.asList(C3, D7, H7, CJ, HQ));
+
+    for (int i=0; i<2; i++) {
+      player.draw(deck, false);
+      dealer.draw(deck, false);
+    }
+
+    game.beforePlayerTurn();
+
+    for(Card card : player.getMainHand().getCards()) {
+      assertThat(card.isUp(), is(true));
+    }
+    for(Card card : dealer.getMainHand().getCards()) {
+      assertThat(card.isUp(), is(true));
+    }
+  }
 }
