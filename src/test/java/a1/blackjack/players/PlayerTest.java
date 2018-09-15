@@ -34,14 +34,12 @@ public class PlayerTest {
   @Mock
   private CommandEngine commandEngine;
 
-  private Console console;
-
   @Rule
   public MockitoRule mockitoRule = MockitoJUnit.rule();
 
   @Before
   public void setUp() {
-    console = new TextConsole();
+    Console console = new TextConsole();
     player = new Player(commandEngine, console, "player");
   }
 
