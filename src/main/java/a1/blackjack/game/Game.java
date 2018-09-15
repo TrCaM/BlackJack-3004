@@ -198,5 +198,4 @@ public class Game {
   Player getWinner() {
     return player.getScore() > dealer.getScore() ? player : dealer;
   }
-
 }
