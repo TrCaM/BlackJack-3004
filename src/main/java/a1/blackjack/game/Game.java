@@ -113,6 +113,14 @@ public class Game {
     }
   }
 
+  private void endGame() {
+    player.getPlayingHand().getCards().forEach(Card::faceUp);
+    dealer.getPlayingHand().getCards().forEach(Card::faceUp);
+    showPlayersHands();
+    showPlayersScore();
+    console.notify(String.format("%s has won!!!!", getWinner()));
+  }
+
   private void showPlayersHands() {
     console.notify("---------------------------------------");
     showPlayerHands(player);
@@ -149,6 +157,10 @@ public class Game {
       sb.append(player.getName()).append("'s score is ").append(player.getScore());
     }
     console.notify(sb.toString());
+  }
+
+  Player getWinner() {
+    return player.getScore() > dealer.getScore() ? player : dealer;
   }
 
 }
