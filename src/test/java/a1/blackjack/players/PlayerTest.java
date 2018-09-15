@@ -5,6 +5,7 @@ import a1.blackjack.cards.Deck;
 import a1.blackjack.cards.Hand;
 import a1.blackjack.cards.Suit;
 import a1.blackjack.commands.CommandEngine;
+import a1.blackjack.views.Console;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,12 +33,15 @@ public class PlayerTest {
   @Mock
   private CommandEngine commandEngine;
 
+  @Mock
+  private Console console;
+
   @Rule
   public MockitoRule mockitoRule = MockitoJUnit.rule();
 
   @Before
   public void setUp() {
-    player = new Player(commandEngine, "player");
+    player = new Player(commandEngine, console, "player");
   }
 
   @Test
@@ -45,7 +49,7 @@ public class PlayerTest {
     List<Card> cards = Arrays.asList(D7, C3, HQ);
     deck = Deck.getDeck(cards);
     for (int i = 0; i < 2; i++) {
-      player.hit(deck);
+      player.draw(deck);
     }
     Hand hand = player.getMainHand();
     assertThat(hand.getCards(), contains(HQ, C3));
@@ -56,7 +60,7 @@ public class PlayerTest {
     player.setMode(PlayerMode.SPLITTING_HAND);
     List<Card> cards = Arrays.asList(D7, C3, HQ);
     deck = Deck.getDeck(cards);
-    player.hit(deck);
+    player.draw(deck);
     Hand hand = player.getSplitHand();
     assertThat(hand.getCards(), contains(HQ));
   }
