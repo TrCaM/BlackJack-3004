@@ -49,6 +49,14 @@ public class Player {
     return this.commandEngine;
   }
 
+  public int getScore() {
+    int mainHandScore = mainHand.getHandScore();
+    int splitHandScore = splitHand.getHandScore();
+    mainHandScore = mainHandScore > 21 ? 0 : mainHandScore;
+    splitHandScore = splitHandScore > 21 ? 0 : splitHandScore;
+    return Math.max(mainHandScore, splitHandScore);
+  }
+
   /**
    * Draw a card to the proper hand from the deck.
    */
