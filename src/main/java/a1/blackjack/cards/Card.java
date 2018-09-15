@@ -32,6 +32,10 @@ public class Card{
     this.isUp = true;
   }
 
+  public void faceDown() {
+    this.isUp = false;
+  }
+
   public Suit getSuit() {
     return this.suit;
   }
