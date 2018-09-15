@@ -108,7 +108,7 @@ public class PlayerTest {
     List<Card> cards = Arrays.asList(D7, C3, HQ);
     deck = Deck.getDeck(cards);
     for (int i = 0; i < 2; i++) {
-      player.draw(deck);
+      player.draw(deck, false);
     }
     Hand hand = player.getMainHand();
     assertThat(hand.getCards(), contains(HQ, C3));
@@ -119,7 +119,7 @@ public class PlayerTest {
     player.setMode(PlayerMode.SPLITTING_HAND);
     List<Card> cards = Arrays.asList(D7, C3, HQ);
     deck = Deck.getDeck(cards);
-    player.draw(deck);
+    player.draw(deck, true);
     Hand hand = player.getSplitHand();
     assertThat(hand.getCards(), contains(HQ));
   }
