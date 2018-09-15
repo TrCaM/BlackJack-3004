@@ -20,6 +20,7 @@ public class Player {
   public Player(CommandEngine commandEngine, Console console, String name) {
     mainHand = new Hand();
     splitHand = new Hand();
+    this.console = console;
     this.commandEngine = commandEngine;
     this.mode = PlayerMode.NORMAL;
     this.name =name;
@@ -70,7 +71,7 @@ public class Player {
         hand = mainHand;
     }
     Card card = deck.draw();
-    hand.addCard(deck.draw());
+    hand.addCard(card);
     console.notify(String.format("%s has draw %s", name, card));
   }
 
@@ -139,5 +140,9 @@ public class Player {
 
   void setMainHand(Hand hand) {
     mainHand = hand;
+  }
+
+  void setSplitHand(Hand hand) {
+    splitHand = hand;
   }
 }
