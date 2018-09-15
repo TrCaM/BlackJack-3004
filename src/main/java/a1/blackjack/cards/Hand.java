@@ -76,8 +76,8 @@ public class Hand {
         && cards.get(1).getValue() == cards.get(0).getValue();
   }
 
-  public boolean isEmpty() {
-    return cards.isEmpty();
+  public boolean hasLessThan2Cards() {
+    return cards.size() < 2;
   }
 
   public List<Card> getCards() {
