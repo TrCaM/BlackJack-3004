@@ -30,11 +30,11 @@ public class Player {
     return name;
   }
 
-  public Hand getMainHand() {
+  Hand getMainHand() {
     return mainHand;
   }
 
-  public Hand getSplitHand() {
+  Hand getSplitHand() {
     return splitHand;
   }
 
