@@ -1,8 +1,10 @@
 package a1.blackjack.players;
 
+import a1.blackjack.cards.Card;
 import a1.blackjack.cards.Deck;
 import a1.blackjack.cards.Hand;
 import a1.blackjack.commands.CommandEngine;
+import a1.blackjack.views.Console;
 
 /**
  * Represent a player who plays the game.
@@ -13,8 +15,9 @@ public class Player {
   private CommandEngine commandEngine;
   private PlayerMode mode;
   private String name;
+  private Console console;
 
-  public Player(CommandEngine commandEngine, String name) {
+  public Player(CommandEngine commandEngine, Console console, String name) {
     mainHand = new Hand();
     splitHand = new Hand();
     this.commandEngine = commandEngine;
@@ -54,7 +57,9 @@ public class Player {
       default:
         hand = mainHand;
     }
+    Card card = deck.draw();
     hand.addCard(deck.draw());
+    console.notify(String.format("%s has draw %s", name, card));
   }
 
   /**
@@ -66,9 +71,11 @@ public class Player {
    * - If the hand is busted then do stand
    */
   void hit(Deck deck) {
+    console.notify(String.format("%s hits", name));
     validatePlayerStateForHit(deck);
     draw(deck);
     if (getPlayingHand().isBust()) {
+      console.notify(String.format("%s busts", name));
       stand();
     }
   }
@@ -83,6 +90,7 @@ public class Player {
   }
 
   void stand() {
+    console.notify(String.format("%s stands", name));
     switch (mode) {
       case NORMAL:
       case SPLITTING_HAND:
@@ -90,6 +98,7 @@ public class Player {
         break;
       default:
         mode = PlayerMode.SPLITTING_HAND;
+        console.notify(String.format("%s uses the second hand", name));
     }
   }
 
@@ -99,6 +108,7 @@ public class Player {
    * 1 more extra. If blackjack happens then the player mode should go STANDING.
    */
   void split() {
+    console.notify(String.format("%s splits", name));
     validatePlayerStateForSplit();
     splitHand.addCard(mainHand.removeCard(1));
     mode = PlayerMode.SPLITTING_MAIN;
