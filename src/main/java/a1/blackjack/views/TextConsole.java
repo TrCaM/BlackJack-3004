@@ -49,4 +49,9 @@ public class TextConsole implements Console {
         throw new IllegalStateException("Never happens");
     }
   }
+
+  @Override
+  public void notify(String message) {
+    System.out.println(message);
+  }
 }

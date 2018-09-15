@@ -14,11 +14,6 @@ public interface Console {
   Command promptCommand(Set<Command> availableCommands);
 
   /**
-   * Notify through interface that the game is starting.
-   */
-  void startGame();
-
-  /**
    * Notify user a message.
    */
   void notify(String message);
