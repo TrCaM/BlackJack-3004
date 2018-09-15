@@ -3,10 +3,14 @@ package a1.blackjack.game;
 import a1.blackjack.cards.Card;
 import a1.blackjack.cards.Deck;
 import a1.blackjack.cards.Hand;
+import a1.blackjack.commands.AutoCommandEngine;
 import a1.blackjack.commands.Command;
+import a1.blackjack.commands.ConsoleCommandEngine;
 import a1.blackjack.players.Player;
 import a1.blackjack.players.PlayerMode;
 import a1.blackjack.views.Console;
+
+import java.util.Queue;
 
 /**
  * {@link Game} class is responsible for or the game logic.
@@ -15,16 +19,12 @@ public class Game {
   private Player player;
   private Player dealer;
   private Deck deck;
-  private boolean isPlayerTurn;
+  private Player activePlayer;
 
   private Console console;
 
   private Game(Console console) {
     this.console = console;
-  }
-
-  public Player getActivePlayer() {
-    return isPlayerTurn ? player : dealer;
   }
 
   Player getPlayer() {
@@ -35,23 +35,51 @@ public class Game {
     return dealer;
   }
 
+  public Player getActivePlayer() {
+    return activePlayer;
+  }
+
+  public static Game initConsoleInputGame(Console console) {
+    Game game = new Game(console);
+    // Initialize player
+    game.player = new Player(
+        new ConsoleCommandEngine(game.console), game.console, "player");
+    game.dealer = new Player(
+        new AutoCommandEngine(), game.console, "dealer");
+    // Create full shuffled deck
+    game.deck = Deck.getFullDeck();
+    game.deck.shuffle();
+    return game;
+  }
+
+  public static Game initFileInputGame(Console console, Queue<Command> commandQueue, Deck deck) {
+    Game game = new Game(console);
+    // Initialize player with commandQueue read from file
+    game.player = new Player(new ConsoleCommandEngine(
+        game.console, commandQueue), game.console, "player");
+    game.dealer = new Player(
+        new AutoCommandEngine(), game.console, "dealer");
+    // The deck is read from the file
+    game.deck = deck;
+    return game;
+  }
+
   void beforePlayerTurn() {
     // Reveal player hand.
     player.getPlayingHand().getCards().forEach(Card::faceUp);
     // Reveal only 1 card of dealer's hand
     dealer.getPlayingHand().getCards().get(0).faceUp();
     showPlayersHands();
-    isPlayerTurn = true;
   }
 
   void beforeDealerTurn() {
     dealer.getPlayingHand().getCards().forEach(Card::faceUp);
-    isPlayerTurn = false;
     showPlayersHands();
   }
 
   void playTurn(Player player) {
     console.notify(String.format("It's %s's turn", player.getName()));
+    activePlayer = player;
     while (player.getMode() != PlayerMode.STANDING) {
       try {
         // This happens in split mode
@@ -84,8 +112,6 @@ public class Game {
         player.stand();
     }
   }
-
-
 
   private void showPlayersHands() {
     console.notify("---------------------------------------");
@@ -124,4 +150,5 @@ public class Game {
     }
     console.notify(sb.toString());
   }
+
 }
