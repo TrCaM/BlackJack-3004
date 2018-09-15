@@ -6,6 +6,7 @@ import a1.blackjack.cards.Hand;
 import a1.blackjack.cards.Suit;
 import a1.blackjack.commands.CommandEngine;
 import a1.blackjack.views.Console;
+import a1.blackjack.views.TextConsole;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -33,7 +34,6 @@ public class PlayerTest {
   @Mock
   private CommandEngine commandEngine;
 
-  @Mock
   private Console console;
 
   @Rule
@@ -41,7 +41,38 @@ public class PlayerTest {
 
   @Before
   public void setUp() {
+    console = new TextConsole();
     player = new Player(commandEngine, console, "player");
+  }
+
+  @Test
+  public void getScore_normalCase_shouldSucceed() {
+    Hand mainHand = new Hand(H7, D7);
+    Hand splitHand = new Hand(HQ, D7);
+    player.setMainHand(mainHand);
+    player.setSplitHand(splitHand);
+
+    assertThat(player.getScore(), is(17));
+  }
+
+  @Test
+  public void getScore_bustedMainHand_shouldReturnSplitHandScore() {
+    Hand mainHand = new Hand(HQ, CJ, C3);
+    Hand splitHand = new Hand(CJ, D7);
+    player.setMainHand(mainHand);
+    player.setSplitHand(splitHand);
+
+    assertThat(player.getScore(), is(17));
+  }
+
+  @Test
+  public void getScore_allBusted_returnZero() {
+    Hand mainHand = new Hand(HQ, CJ, C3);
+    Hand splitHand = new Hand(HQ, D7, CJ);
+    player.setMainHand(mainHand);
+    player.setSplitHand(splitHand);
+
+    assertThat(player.getScore(), is(0));
   }
 
   @Test
