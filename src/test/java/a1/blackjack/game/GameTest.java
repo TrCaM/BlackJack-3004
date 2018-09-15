@@ -3,21 +3,26 @@ package a1.blackjack.game;
 import a1.blackjack.cards.Card;
 import a1.blackjack.cards.Deck;
 import a1.blackjack.cards.Suit;
+import a1.blackjack.commands.Command;
 import a1.blackjack.players.Player;
 import a1.blackjack.players.PlayerMode;
 import a1.blackjack.views.TextConsole;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class GameTest {
   private static final Card C3 = new Card(Suit.CLUB, 3);
+  private static final Card DJ = new Card(Suit.DIAMOND, 11);
+  private static final Card C5 = new Card(Suit.CLUB, 5);
+  private static final Card SQ = new Card(Suit.SPADE, 12);
+  private static final Card SK = new Card(Suit.SPADE, 13);
   private static final Card D7 = new Card(Suit.SPADE, 7);
   private static final Card H7 = new Card(Suit.HEART, 7);
   private static final Card CJ = new Card(Suit.CLUB, 11);
@@ -28,10 +33,12 @@ public class GameTest {
 
   @Before
   public void setUp() {
-    deck = Deck.getDeck(Arrays.asList(C3, D7, H7, CJ, HQ));
+    deck = Deck.getDeck(Arrays.asList(DJ, C5, SQ, HQ, SK));
+    Queue<Command> commandQueue = new LinkedList<>();
+    commandQueue.add(Command.STAND);
+    commandQueue.add(Command.HIT);
     deck.getCards().forEach(Card::faceDown);
-    InputStream in = new ByteArrayInputStream("S H".getBytes());
-    game = Game.initConsoleInputGame(new TextConsole(in));
+    game = Game.initFileInputGame(new TextConsole(), commandQueue, deck);
   }
 
   @Test
@@ -72,11 +79,61 @@ public class GameTest {
   }
 
   @Test
-  public void playTurn_standing_doNothing() {
+  public void playTurn_testUserInputAndAutomateCommandEngine_doNothing() {
     Player player = game.getPlayer();
+    Player dealer = game.getDealer();
+
+    for (int i=0; i<2; i++) {
+      player.draw(deck, false);
+    }
+    for (int i=0; i<2; i++) {
+      dealer.draw(deck, false);
+    }
 
     game.playTurn(player);
+    game.playTurn(dealer);
 
     assertThat(player.getMode(), is(PlayerMode.STANDING));
+    assertThat(player.getScore(), is(20));
+    assertThat(dealer.getScore(), is(0));
+  }
+
+  @Test
+  public void playTurn_playersSplitHand() {
+    deck = Deck.getDeck(Arrays.asList(
+        new Card(Suit.DIAMOND, 5),
+        new Card(Suit.CLUB, 5),
+        new Card(Suit.DIAMOND, 3),
+        new Card(Suit.HEART, 6),
+        new Card(Suit.DIAMOND, 9),
+        new Card(Suit.CLUB, 12),
+        new Card(Suit.HEART, 13),
+        new Card(Suit.SPADE, 13)
+    ));
+    Queue<Command> commandQueue = new LinkedList<>();
+    commandQueue.add(Command.SPLIT);
+    commandQueue.add(Command.HIT);
+    commandQueue.add(Command.STAND);
+    commandQueue.add(Command.HIT);
+    commandQueue.add(Command.STAND);
+    deck.getCards().forEach(Card::faceDown);
+    game = Game.initFileInputGame(new TextConsole(), commandQueue, deck);
+    Player player = game.getPlayer();
+    Player dealer = game.getDealer();
+
+    for (int i=0; i<2; i++) {
+      player.draw(deck, true);
+    }
+    for (int i=0; i<2; i++) {
+      dealer.draw(deck, true);
+    }
+
+    game.playTurn(player);
+    game.playTurn(dealer);
+
+    assertThat(player.getMode(), is(PlayerMode.STANDING));
+    assertThat(dealer.getMode(), is(PlayerMode.STANDING));
+    assertThat(player.getScore(), is(20));
+    assertThat(dealer.getScore(), is(19));
   }
 }
