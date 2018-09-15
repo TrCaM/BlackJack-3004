@@ -6,9 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.Matchers.isIn;
+import static org.junit.Assert.*;
 
 public class DeckTest {
 
@@ -35,5 +34,21 @@ public class DeckTest {
   public void draw_emptyDeck_returnNull() {
     Deck deck = Deck.getEmptyDeck();
     assertNull(deck.draw());
+  }
+
+  @Test
+  public void getFullDeck_shouldHave52Card() {
+    Deck deck = Deck.getFullDeck();
+    assertEquals(deck.getCards().size(), 52);
+  }
+
+  @Test
+  public void shuffle_shouldSucceed() {
+    Deck deck = Deck.getDeck(SAMPLE_CARDS);
+    deck.shuffle();
+    deck.getCards().forEach(Card::faceUp);
+    for (Card card : deck.getCards()) {
+      assertThat(card, isIn(SAMPLE_CARDS));
+    }
   }
 }
