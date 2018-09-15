@@ -1,8 +1,11 @@
 package a1.blackjack.interpreters;
 
 import a1.blackjack.cards.Card;
+import a1.blackjack.cards.Deck;
 import a1.blackjack.cards.Suit;
 import a1.blackjack.commands.Command;
+
+import java.util.Queue;
 
 /**
  * The interpreter to transform different types of input to {@link Command} or {@link Card}
@@ -84,5 +87,9 @@ public class Interpreter {
       default:
         throw new IllegalArgumentException(String.format("Unknown card: %s", text));
     }
+  }
+
+  public static void stringInterpret(String input, Queue<Command> commandQueue, Deck deck) {
+
   }
 }
