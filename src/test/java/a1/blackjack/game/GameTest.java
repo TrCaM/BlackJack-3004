@@ -174,4 +174,74 @@ public class GameTest {
     assertThat(dealer.getScore(), is(18));
     assertThat(game.getWinner(), is(player));
   }
+
+  @Test
+  public void gameTest_blackJackForBoth_dealerWinsWithoutPlaying() {
+    deck = Deck.getDeck(Arrays.asList(
+        new Card(Suit.CLUB, 1),
+        new Card(Suit.HEART, 12),
+        new Card(Suit.HEART, 1),
+        new Card(Suit.SPADE, 13)
+    ));
+    Queue<Command> commandQueue = new LinkedList<>();
+    deck.getCards().forEach(Card::faceDown);
+    game = Game.initFileInputGame(new TextConsole(), commandQueue, deck);
+
+    game.start();
+
+    Player player = game.getPlayer();
+    Player dealer = game.getDealer();
+    assertThat(player.getMode(), is(PlayerMode.STANDING));
+    assertThat(dealer.getMode(), is(PlayerMode.STANDING));
+    assertThat(player.getScore(), is(21));
+    assertThat(dealer.getScore(), is(21));
+    assertThat(game.getWinner(), is(dealer));
+  }
+
+  @Test
+  public void gameTest_blackJackForPlayer_playerWinNoPlay() {
+    deck = Deck.getDeck(Arrays.asList(
+        new Card(Suit.CLUB, 4),
+        new Card(Suit.HEART, 12),
+        new Card(Suit.HEART, 1),
+        new Card(Suit.SPADE, 13)
+    ));
+    Queue<Command> commandQueue = new LinkedList<>();
+    deck.getCards().forEach(Card::faceDown);
+    game = Game.initFileInputGame(new TextConsole(), commandQueue, deck);
+
+    game.start();
+
+    Player player = game.getPlayer();
+    Player dealer = game.getDealer();
+    assertThat(player.getMode(), is(PlayerMode.STANDING));
+    assertThat(dealer.getMode(), is(PlayerMode.STANDING));
+    assertThat(player.getScore(), is(21));
+    assertThat(dealer.getScore(), is(14));
+    assertThat(game.getWinner(), is(player));
+  }
+  @Test
+  public void gameTest_playerBusts_dealerWins() {
+    deck = Deck.getDeck(Arrays.asList(
+        new Card(Suit.SPADE, 4),
+        new Card(Suit.CLUB, 4),
+        new Card(Suit.HEART, 12),
+        new Card(Suit.HEART, 10),
+        new Card(Suit.SPADE, 13)
+    ));
+    Queue<Command> commandQueue = new LinkedList<>();
+    commandQueue.add(Command.HIT);
+    deck.getCards().forEach(Card::faceDown);
+    game = Game.initFileInputGame(new TextConsole(), commandQueue, deck);
+
+    game.start();
+
+    Player player = game.getPlayer();
+    Player dealer = game.getDealer();
+    assertThat(player.getMode(), is(PlayerMode.STANDING));
+    assertThat(dealer.getMode(), is(PlayerMode.STANDING));
+    assertThat(player.getScore(), is(0));
+    assertThat(dealer.getScore(), is(14));
+    assertThat(game.getWinner(), is(dealer));
+  }
 }
