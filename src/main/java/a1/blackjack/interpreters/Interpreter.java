@@ -5,8 +5,10 @@ import a1.blackjack.cards.Deck;
 import a1.blackjack.cards.Suit;
 import a1.blackjack.commands.Command;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Set;
 
 /**
  * The interpreter to transform different types of input to {@link Command} or {@link Card}
@@ -93,6 +95,7 @@ public class Interpreter {
   public static void stringInterpret(String input, Queue<Command> commandQueue, Deck deck) {
     String[] elements = input.split(" ");
     LinkedList<Card> cardsList = new LinkedList<>();
+    Set<String> cardsString = new HashSet<>();
     boolean shouldBeCardString = false;
     try {
       for (String word : elements) {
@@ -100,14 +103,19 @@ public class Interpreter {
           commandQueue.add(commandInterpret(word));
           shouldBeCardString = true;
         } else if (word.length() > 0 && word.length() <= 3) {
-          cardsList.addFirst(cardInterpret(word));
+          Card card = cardInterpret(word);
+          if (!cardsString.add(word)) {
+            throw new IllegalArgumentException("Duplicate cards.");
+          }
+          cardsList.addFirst(card);
           shouldBeCardString = false;
         } else {
-          throw new IllegalArgumentException("Invalid file input");
+          throw new IllegalArgumentException("Unrecognized card or command");
         }
       }
     } catch (IllegalArgumentException e) {
-      throw new IllegalArgumentException("Invalid file input");
+      throw new IllegalArgumentException(
+          String.format("Invalid file input: %s", e.getMessage()));
     }
     deck.getCards().addAll(cardsList);
   }
