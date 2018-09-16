@@ -1,6 +1,7 @@
 package a1.blackjack.views;
 
 import a1.blackjack.commands.Command;
+import a1.blackjack.game.GameMode;
 import a1.blackjack.interpreters.Interpreter;
 
 import java.io.InputStream;
@@ -18,9 +19,19 @@ public class TextConsole implements Console {
     this(System.in);
   }
 
-  public TextConsole(InputStream input) {
+  TextConsole(InputStream input) {
     scanner = new Scanner(input);
     shouldShowInfo = true;
+  }
+
+  @Override
+  public GameMode promptGameMode() {
+    System.out.println("Do you want to use console [C] input or file [F] input (c/f)?");
+    String input;
+    do {
+      input = scanner.next();
+    } while (!input.toUpperCase().equals("C")  && !input.toUpperCase().equals("F"));
+    return input.toUpperCase().equals("C") ? GameMode.CONSOLE : GameMode.FILE;
   }
 
   @Override
