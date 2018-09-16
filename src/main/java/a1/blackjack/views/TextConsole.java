@@ -26,12 +26,6 @@ public class TextConsole implements Console {
 
   @Override
   public GameMode promptGameMode() {
-    System.out.println("Do you want to use console [C] input or file [F] input (c/f)?");
-    String input;
-    do {
-      input = scanner.next();
-    } while (!input.toUpperCase().equals("C")  && !input.toUpperCase().equals("F"));
-    return input.toUpperCase().equals("C") ? GameMode.CONSOLE : GameMode.FILE;
   }
 
   @Override

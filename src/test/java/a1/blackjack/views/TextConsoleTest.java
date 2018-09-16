@@ -1,6 +1,7 @@
 package a1.blackjack.views;
 
 import a1.blackjack.commands.Command;
+import a1.blackjack.game.GameMode;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -13,6 +14,22 @@ import static org.junit.Assert.assertThat;
 
 public class TextConsoleTest {
   private TextConsole textConsole;
+
+  @Test
+  public void promptGameMode_shouldSucceed_console() {
+    InputStream in = new ByteArrayInputStream("C".getBytes());
+    textConsole = new TextConsole(in);
+
+    assertThat(textConsole.promptGameMode(), is(GameMode.CONSOLE));
+  }
+
+  @Test
+  public void promptGameMode_shouldSucceed_file() {
+    InputStream in = new ByteArrayInputStream("a hello F".getBytes());
+    textConsole = new TextConsole(in);
+
+    assertThat(textConsole.promptGameMode(), is(GameMode.FILE));
+  }
 
   @Test
   public void promptCommand_shouldSucceed() {
