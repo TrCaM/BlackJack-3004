@@ -5,6 +5,7 @@ import a1.blackjack.cards.Deck;
 import a1.blackjack.cards.Suit;
 import a1.blackjack.commands.Command;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 /**
@@ -90,6 +91,24 @@ public class Interpreter {
   }
 
   public static void stringInterpret(String input, Queue<Command> commandQueue, Deck deck) {
-
+    String[] elements = input.split(" ");
+    LinkedList<Card> cardsList = new LinkedList<>();
+    boolean shouldBeCardString = false;
+    try {
+      for (String word : elements) {
+        if (word.length() == 1 && !shouldBeCardString) {
+          commandQueue.add(commandInterpret(word));
+          shouldBeCardString = true;
+        } else if (word.length() > 0 && word.length() <= 3) {
+          cardsList.addFirst(cardInterpret(word));
+          shouldBeCardString = false;
+        } else {
+          throw new IllegalArgumentException("Invalid file input");
+        }
+      }
+    } catch (IllegalArgumentException e) {
+      throw new IllegalArgumentException("Invalid file input");
+    }
+    deck.getCards().addAll(cardsList);
   }
 }
