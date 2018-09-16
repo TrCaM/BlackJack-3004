@@ -92,6 +92,14 @@ public class InterpreterTest {
   }
 
   @Test(expected =  IllegalArgumentException.class)
+  public void fileInterpreter_duplicateCards_shouldThrow() {
+    Queue<Command> commandQueue = new LinkedList<>();
+    Deck deck = Deck.getEmptyDeck();
+
+    Interpreter.stringInterpret("H S9 S S9", commandQueue, deck);
+  }
+
+  @Test(expected =  IllegalArgumentException.class)
   public void fileInterpreter_cardMustBeDrawnAfterHit_shouldThrow() {
     Queue<Command> commandQueue = new LinkedList<>();
     Deck deck = Deck.getEmptyDeck();
