@@ -1,7 +1,7 @@
 # BlackJack-3004
 Black game using TDD (3004 Assignment)
 
-__Name:__ Tri Cao
+__Name:__ Tri Cao \
 __ID:__   100971065
 
 ## Set up instruction
@@ -24,4 +24,5 @@ __Note:__ I developed the project using maven and InteliJ IDE, but you can total
 ### Run test
 * Right click on the package a1.blackjack in test directory
 * Run all tests. (IntelliJ) or Run as.../Junit Test (Eclipse)
-
+### Change input file
+* You can change the inputs.txt file in "src/main/resources" directory
