@@ -40,9 +40,11 @@ public class HandTest {
     Hand hand1 = new Hand(DA, S8, D7);
     Hand hand2 = new Hand(DA, SK);
     Hand hand3 = new Hand(DA, SA, D7, C3);
+    Hand hand4 = new Hand(DA, SA, D7, SK);
     assertEquals(16, hand1.getHandScore());
     assertEquals(21, hand2.getHandScore());
     assertEquals(21, hand3.getHandScore());
+    assertEquals(19, hand4.getHandScore());
   }
 
   @Test
