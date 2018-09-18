@@ -244,4 +244,29 @@ public class GameTest {
     assertThat(dealer.getScore(), is(14));
     assertThat(game.getWinner(), is(dealer));
   }
+
+  @Test
+  public void gameTest_dealerBusts_playerWins() {
+    deck = Deck.getDeck(Arrays.asList(
+        new Card(Suit.SPADE, 10),
+        new Card(Suit.CLUB, 4),
+        new Card(Suit.HEART, 10),
+        new Card(Suit.HEART, 12),
+        new Card(Suit.SPADE, 13)
+    ));
+    Queue<Command> commandQueue = new LinkedList<>();
+    commandQueue.add(Command.STAND);
+    deck.getCards().forEach(Card::faceDown);
+    game = Game.initFileInputGame(new TextConsole(), commandQueue, deck);
+
+    game.start();
+
+    Player player = game.getPlayer();
+    Player dealer = game.getDealer();
+    assertThat(player.getMode(), is(PlayerMode.STANDING));
+    assertThat(dealer.getMode(), is(PlayerMode.STANDING));
+    assertThat(player.getScore(), is(20));
+    assertThat(dealer.getScore(), is(0));
+    assertThat(game.getWinner(), is(player));
+  }
 }
