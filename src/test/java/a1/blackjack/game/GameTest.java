@@ -99,7 +99,7 @@ public class GameTest {
   }
 
   @Test
-  public void playTurn_playersSplitHand() {
+  public void playTurn_playerSplitsHand() {
     deck = Deck.getDeck(Arrays.asList(
         new Card(Suit.DIAMOND, 5),
         new Card(Suit.CLUB, 5),
@@ -139,7 +139,7 @@ public class GameTest {
   }
 
   @Test
-  public void playTurn_dealerSplitHand() {
+  public void playTurn_dealerSplitsHand() {
     deck = Deck.getDeck(Arrays.asList(
         new Card(Suit.DIAMOND, 2),
         new Card(Suit.SPADE, 12),
