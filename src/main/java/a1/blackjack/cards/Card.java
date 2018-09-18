@@ -28,8 +28,9 @@ public class Card{
     this.isUp = false;
   }
 
-  public void faceUp() {
+  public Card faceUp() {
     this.isUp = true;
+    return this;
   }
 
   public void faceDown() {
@@ -40,7 +41,7 @@ public class Card{
     return this.suit;
   }
 
-  public int getValue() {
+  int getValue() {
     return this.value;
   }
 

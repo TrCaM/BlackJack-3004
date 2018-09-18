@@ -20,13 +20,13 @@ public class CardTest {
 
   @Test
   public void toString_shouldSucceed() {
-    assertThat(new Card(Suit.SPADE, 3).toString(), is("S3"));
-    assertThat(new Card(Suit.SPADE, 1).toString(), is("SA"));
-    assertThat(new Card(Suit.HEART, 9).toString(), is("H9"));
-    assertThat(new Card(Suit.HEART, 10).toString(), is("H10"));
-    assertThat(new Card(Suit.DIAMOND, 5).toString(), is("D5"));
-    assertThat(new Card(Suit.DIAMOND, 11).toString(), is("DJ"));
-    assertThat(new Card(Suit.CLUB, 13).toString(), is("CK"));
-    assertThat(new Card(Suit.CLUB, 12).toString(), is("CQ"));
+    assertThat(new Card(Suit.SPADE, 3).faceUp().toString(), is("S3"));
+    assertThat(new Card(Suit.SPADE, 1).faceUp().toString(), is("SA"));
+    assertThat(new Card(Suit.HEART, 9).faceUp().toString(), is("H9"));
+    assertThat(new Card(Suit.HEART, 10).faceUp().toString(), is("H10"));
+    assertThat(new Card(Suit.DIAMOND, 5).faceUp().toString(), is("D5"));
+    assertThat(new Card(Suit.DIAMOND, 11).faceUp().toString(), is("DJ"));
+    assertThat(new Card(Suit.CLUB, 13).faceUp().toString(), is("CK"));
+    assertThat(new Card(Suit.CLUB, 12).faceUp().toString(), is("CQ"));
   }
 }
