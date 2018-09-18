@@ -46,14 +46,14 @@ public class GameTest {
     Player player = game.getPlayer();
     Player dealer = game.getDealer();
 
-    for (int i=0; i<2; i++) {
+    for (int i = 0; i < 2; i++) {
       player.draw(deck, false);
       dealer.draw(deck, false);
     }
 
     game.beforePlayerTurn();
 
-    for(Card card : player.getMainHand().getCards()) {
+    for (Card card : player.getMainHand().getCards()) {
       assertThat(card.isUp(), is(true));
     }
     assertThat(dealer.getMainHand().getCards().get(0).isUp(), is(true));
@@ -66,14 +66,14 @@ public class GameTest {
     Player dealer = game.getDealer();
     Deck deck = Deck.getDeck(Arrays.asList(C3, D7, H7, CJ, HQ));
 
-    for (int i=0; i<2; i++) {
+    for (int i = 0; i < 2; i++) {
       player.draw(deck, false);
       dealer.draw(deck, false);
     }
 
     game.beforeDealerTurn();
 
-    for(Card card : dealer.getMainHand().getCards()) {
+    for (Card card : dealer.getMainHand().getCards()) {
       assertThat(card.isUp(), is(true));
     }
   }
@@ -83,10 +83,10 @@ public class GameTest {
     Player player = game.getPlayer();
     Player dealer = game.getDealer();
 
-    for (int i=0; i<2; i++) {
+    for (int i = 0; i < 2; i++) {
       player.draw(deck, false);
     }
-    for (int i=0; i<2; i++) {
+    for (int i = 0; i < 2; i++) {
       dealer.draw(deck, false);
     }
 
@@ -121,10 +121,10 @@ public class GameTest {
     Player player = game.getPlayer();
     Player dealer = game.getDealer();
 
-    for (int i=0; i<2; i++) {
+    for (int i = 0; i < 2; i++) {
       player.draw(deck, true);
     }
-    for (int i=0; i<2; i++) {
+    for (int i = 0; i < 2; i++) {
       dealer.draw(deck, true);
     }
 
@@ -158,10 +158,10 @@ public class GameTest {
     Player player = game.getPlayer();
     Player dealer = game.getDealer();
 
-    for (int i=0; i<2; i++) {
+    for (int i = 0; i < 2; i++) {
       player.draw(deck, true);
     }
-    for (int i=0; i<2; i++) {
+    for (int i = 0; i < 2; i++) {
       dealer.draw(deck, true);
     }
 
@@ -220,6 +220,7 @@ public class GameTest {
     assertThat(dealer.getScore(), is(14));
     assertThat(game.getWinner(), is(player));
   }
+
   @Test
   public void gameTest_playerBusts_dealerWins() {
     deck = Deck.getDeck(Arrays.asList(
@@ -267,6 +268,57 @@ public class GameTest {
     assertThat(dealer.getMode(), is(PlayerMode.STANDING));
     assertThat(player.getScore(), is(20));
     assertThat(dealer.getScore(), is(0));
+    assertThat(game.getWinner(), is(player));
+  }
+
+  @Test
+  public void gameTest_dealerHigherScore_dealerWins() {
+    deck = Deck.getDeck(Arrays.asList(
+        new Card(Suit.SPADE, 7),
+        new Card(Suit.CLUB, 4),
+        new Card(Suit.HEART, 10),
+        new Card(Suit.HEART, 12),
+        new Card(Suit.SPADE, 13)
+    ));
+    Queue<Command> commandQueue = new LinkedList<>();
+    commandQueue.add(Command.STAND);
+    deck.getCards().forEach(Card::faceDown);
+    game = Game.initFileInputGame(new TextConsole(), commandQueue, deck);
+
+    game.start();
+
+    Player player = game.getPlayer();
+    Player dealer = game.getDealer();
+    assertThat(player.getMode(), is(PlayerMode.STANDING));
+    assertThat(dealer.getMode(), is(PlayerMode.STANDING));
+    assertThat(player.getScore(), is(20));
+    assertThat(dealer.getScore(), is(21));
+    assertThat(game.getWinner(), is(dealer));
+  }
+
+  @Test
+  public void gameTest_playerHigherScore_playerWins() {
+    deck = Deck.getDeck(Arrays.asList(
+        new Card(Suit.SPADE, 7),
+        new Card(Suit.HEART, 12),
+        new Card(Suit.SPADE, 13),
+        new Card(Suit.CLUB, 4),
+        new Card(Suit.HEART, 10)
+        ));
+    Queue<Command> commandQueue = new LinkedList<>();
+    commandQueue.add(Command.HIT);
+    commandQueue.add(Command.STAND);
+    deck.getCards().forEach(Card::faceDown);
+    game = Game.initFileInputGame(new TextConsole(), commandQueue, deck);
+
+    game.start();
+
+    Player player = game.getPlayer();
+    Player dealer = game.getDealer();
+    assertThat(player.getMode(), is(PlayerMode.STANDING));
+    assertThat(dealer.getMode(), is(PlayerMode.STANDING));
+    assertThat(dealer.getScore(), is(20));
+    assertThat(player.getScore(), is(21));
     assertThat(game.getWinner(), is(player));
   }
 }
